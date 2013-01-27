@@ -8,47 +8,47 @@ define ['controls'], (controls) ->
 
     constructor: (el, @game) ->
       @el = el
+      @flip = 1
       @pos =
         x: 0
         y: 0
       @velocity =
         x: 0
         y: 0
-      @jumping = false
 
     onFrame: (delta) ->
+      # Move left or right
       if controls.keys.right
         @velocity.x += @acceleration.x
+        @flip = -1
       if controls.keys.left
         @velocity.x -= @acceleration.x
+        @flip = 1
 
-      #cap speed
+      # Cap left and right speed
       if @velocity.x < -@speed
         @velocity.x = -@speed
       if @velocity.x > @speed
         @velocity.x = @speed
 
-      if controls.keys.space and not @jumping
-        @velocity.y = @acceleration.y
-        @jumping = true
-
-      
-      oldY = @pos.y
-      @pos.x += delta * @velocity.x
-      @pos.y += delta * @velocity.y
-
-      #drag
-      @velocity.x *= 0.85
-      @velocity.y += delta * @gravity
-
+      # Jumping
       @checkPlatforms oldY
       if @pos.y > 0
         @pos.y = 0
         @velocity.y = 0
-        @jumping = false
+        @velocity.y = @acceleration.y
+
+      # Update the position
+      oldY = @pos.y
+      @pos.x += delta * @velocity.x
+      @pos.y += delta * @velocity.y
+
+      # Drag
+      @velocity.x *= 0.85
+      @velocity.y += delta * @gravity
       
       # Update UI
-      @el.css '-webkit-transform', "translate(#{@pos.x}px,#{@pos.y}px)"
+      @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y}px) scale(#{@flip}, 1)"
 
     checkPlatforms: (oldY) ->
       for platform in @game.platforms
