@@ -3,7 +3,6 @@
 .container {
   bottom: 0;
   left: 0;
-  background: url('../images/background.png');
   min-height: 600px;
   overflow: hidden;
   position: absolute;
@@ -12,9 +11,10 @@
 }
 
 .game {
+  background: url('../images/background.png');
   position: relative;
   border: 1px solid;
-  width: 800px;
+  width: 532px;
   height: 600px;
 }
 

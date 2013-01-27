@@ -53,11 +53,8 @@ define ['controls'], (controls) ->
       @pos.x += delta * @velocity.x
       @pos.y += delta * @velocity.y
 
+      # Check for collisions
       @checkPlatforms oldY
-      #if @pos.y > 0
-      #  @pos.y = 0
-      #  @velocity.y = 0
-      #  @jumping = false
       
       # Update UI
       @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y}px) scale(#{@flip}, 1)"
