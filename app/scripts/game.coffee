@@ -10,17 +10,17 @@ define ["player", "platform"], (Player, Platform) ->
     @el = el
     @player = new Player(@el.find(".player"), this)
 
-    # Cache a bound onFrame and el.width() since we need it each frame.
+    # Cache a bound onFrame, el.width() and el.height() since we need them each frame.
     @onFrame = @onFrame.bind(this)
     @width = el.width()
+    @height = el.height()
 
   Game::reset = ->
     @player.pos = 
       x: @width/2
-      y: 500
+      y: 550
     @platforms = []
-    @createPlatform 100, 450
-    @createPlatform 220, @el.height()-30, @width, 10
+    @addRandomPlatforms()
 
   Game::createPlatform = (x, y) ->
     rect =
@@ -30,6 +30,14 @@ define ["player", "platform"], (Player, Platform) ->
     platform = new Platform(rect)
     @platforms.push platform
     @el.append platform.el
+
+  Game::addRandomPlatforms = ->
+    # Create one platform under him
+    @createPlatform(@width/2 - 45, @height - 30)
+
+    # Create random platforms (this needs to be improved because of overlapping)
+    for i in [0..10]
+      @createPlatform Math.random()*(@width-90), Math.random()*(@height-30)
   
   ###
   Runs every frame. Calculates a delta and allows each game entity to update itself.
