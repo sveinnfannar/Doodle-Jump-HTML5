@@ -5,6 +5,7 @@ define ['controls'], (controls) ->
     JUMP_VELOCITY: 900
     MAX_SPEED: 400
     GRAVITY: 3000
+    PLATFORM_OFFSET: 10
 
     constructor: (el, @game) ->
       @el = el
@@ -64,7 +65,7 @@ define ['controls'], (controls) ->
     checkPlatforms: (oldY) ->
       for platform in @game.platforms
         if @pos.y > platform.rect.y and platform.rect.y >= oldY
-          if @pos.x > platform.rect.x and @pos.x < platform.rect.right
+          if @pos.x > platform.rect.x - @PLATFORM_OFFSET and @pos.x < platform.rect.right + @PLATFORM_OFFSET
             @pos.y = platform.rect.y
             @velocity.y = 0
             @jumping = false

@@ -17,10 +17,10 @@ define ["player", "platform"], (Player, Platform) ->
   Game::reset = ->
     @player.pos = 
       x: @width/2
-      y: 600
+      y: 500
     @platforms = []
-    @createPlatform 100, 500
-    @createPlatform 0, @el.height(), @width, 10
+    @createPlatform 100, 450
+    @createPlatform 220, @el.height()-30, @width, 10
 
   Game::createPlatform = (x, y) ->
     rect =
