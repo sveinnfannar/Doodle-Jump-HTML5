@@ -15,12 +15,15 @@ define ['controls'], (controls) ->
         x: 0
         y: 0
       @jumping = false
+      @flip = 1
 
     onFrame: (delta) ->
       if controls.keys.right
         @velocity.x += @acceleration.x
+        @flip = -1
       if controls.keys.left
         @velocity.x -= @acceleration.x
+        @flip = 1
 
       #cap speed
       if @velocity.x < -@speed
@@ -48,7 +51,7 @@ define ['controls'], (controls) ->
         @jumping = false
       
       # Update UI
-      @el.css '-webkit-transform', "translate(#{@pos.x}px,#{@pos.y}px)"
+      @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y}px) scale(#{@flip}, 1)"
 
     checkPlatforms: (oldY) ->
       for platform in @game.platforms
