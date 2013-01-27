@@ -9,6 +9,7 @@ define ['controls'], (controls) ->
 
     constructor: (el, @game) ->
       @el = el
+      @flip = 1
       @pos =
         x: 0
         y: 100
