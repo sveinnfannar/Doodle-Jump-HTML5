@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Level name="Doodle" xmloverlaypath="src/vooga/games/doodlejump/resources/overlays.xml">
+
+	<SpriteGroups>
+
+
+		<SpriteGroup name="ballGroup">
+			<Sprite class="vooga.games.doodlejump.BallSprite" random="false"
+				x="0" y="0" vx="0" vy="0" quantity="0">
+				<Visual name="ball" />
+			</Sprite>
+		</SpriteGroup>
+
+		<SpriteGroup name="platformGroup">
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="400" y="-200" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="200" y="400" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="325" y="700" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="200" y="150" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="300" y="550" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="100" y="600" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="50" y="50" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="70" y="500" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="1" y="800" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="50" y="200" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="415" y="200" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="50" y="425" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="500" y="350" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="150" y="100" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="325" y="-200" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="300" y="-400" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="100" y="-300" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="1" y="-100" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="415" y="-700" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="50" y="-475" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="150" y="-800" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="400" y="-1000" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="200" y="-1050" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="325" y="-1100" vx="0" vy="0" quantity="1">
+				<Visual name="greenPlatform" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.platforms.GrayPlatform"
+				random="false" x="200" y="-500" vx="0" vy="0" quantity="1">
+				<Visual name="grayPlatform" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.platforms.GrayPlatform"
+				random="false" x="200" y="-1400" vx="0" vy="0" quantity="1">
+				<Visual name="grayPlatform" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.platforms.LightBluePlatform"
+				random="false" x="200" y="-800" vx="0" vy="0" quantity="1">
+				<Visual name="lightBluePlatform" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.platforms.LightBluePlatform"
+				random="false" x="200" y="-1700" vx="0" vy="0" quantity="1">
+				<Visual name="lightBluePlatform" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="0" y="-1600" vx="0" vy="0" quantity="1">
+				<Visual name="finishLine" />
+			</Sprite>
+		</SpriteGroup>
+
+		<SpriteGroup name="whitePlatformGroup">
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="300" y="-1300" vx="0" vy="0" quantity="1">
+				<Visual name="whitePlatform" />
+			</Sprite>
+		</SpriteGroup>
+
+		<SpriteGroup name="monsterGroup">
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingFlyingMonster"
+				random="false" x="50" y="-800" vx="0" vy="0" quantity="1">
+				<Visual name="blueFlyingMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingFlyingMonster"
+				random="false" x="50" y="-1700" vx="0" vy="0" quantity="1">
+				<Visual name="blueFlyingMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.MovingMonster"
+				random="false" x="70" y="-400" vx="0" vy="0" quantity="1">
+				<Visual name="blueMonsterLeft" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.MovingMonster"
+				random="false" x="70" y="-1300" vx="0" vy="0" quantity="1">
+				<Visual name="blueMonsterLeft" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingMonster"
+				random="false" x="50" y="-700" vx="0" vy="0" quantity="1">
+				<Visual name="greenMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingMonster"
+				random="false" x="500" y="-350" vx="0" vy="0" quantity="1">
+				<Visual name="redMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingMonster"
+				random="false" x="50" y="-1600" vx="0" vy="0" quantity="1">
+				<Visual name="greenMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingMonster"
+				random="false" x="50" y="-1575" vx="0" vy="0" quantity="1">
+				<Visual name="greenMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingMonster"
+				random="false" x="500" y="-1250" vx="0" vy="0" quantity="1">
+				<Visual name="redMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JigglingMonster"
+				random="false" x="500" y="-1250" vx="0" vy="0" quantity="1">
+				<Visual name="bigBlueMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.FlyingMonster"
+				random="false" x="1" y="-1000" vx="0" vy="0" quantity="1">
+				<Visual name="greenFlyingMonster" />
+			</Sprite>
+			<Sprite class="vooga.games.doodlejump.monsters.JumpingMonster"
+				random="false" x="150" y="-1700" vx="0" vy="0" quantity="1">
+				<Visual name="greenJumpingMonster" />
+			</Sprite>
+		</SpriteGroup>
+
+		<SpriteGroup name="springGroup">
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="326" y="680" vx="0" vy="0" quantity="1">
+				<Visual name="spring" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="326" y="-220" vx="0" vy="0" quantity="1">
+				<Visual name="spring" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="326" y="-1120" vx="0" vy="0" quantity="1">
+				<Visual name="spring" />
+			</Sprite>
+		</SpriteGroup>
+
+		<SpriteGroup name="trampolineGroup">
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="100" y="530" vx="0" vy="0" quantity="1">
+				<Visual name="trampoline" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="100" y="-370" vx="0" vy="0" quantity="1">
+				<Visual name="trampoline" />
+			</Sprite>
+			<Sprite class="vooga.engine.core.BetterSprite" random="false"
+				x="100" y="-1270" vx="0" vy="0" quantity="1">
+				<Visual name="trampoline" />
+			</Sprite>
+		</SpriteGroup>
+
+		<SpriteGroup name="doodleGroup">
+			<Sprite class="vooga.games.doodlejump.DoodleSprite" random="false"
+				x="400" y="400" vx="0" vy="0" quantity="1">
+				<Visual name="doodleRight" />
+				<Stat name="score" />
+				<Stat name="lives" />
+			</Sprite>
+		</SpriteGroup>
+	</SpriteGroups>
+
+	<CollisionGroups>
+		<CollisionGroup
+			subclass="vooga.games.doodlejump.collisions.DoodleToGreenPlatformCollision">
+			<SpriteGroup name="doodleGroup" />
+			<SpriteGroup name="platformGroup" />
+		</CollisionGroup>
+
+		<CollisionGroup
+			subclass="vooga.games.doodlejump.collisions.BallToMonsterCollision">
+			<SpriteGroup name="ballGroup" />
+			<SpriteGroup name="monsterGroup" />
+		</CollisionGroup>
+
+		<CollisionGroup
+			subclass="vooga.games.doodlejump.collisions.DoodleToSpringCollision">
+			<SpriteGroup name="doodleGroup" />
+			<SpriteGroup name="springGroup" />
+		</CollisionGroup>
+
+		<CollisionGroup
+			subclass="vooga.games.doodlejump.collisions.DoodleToTrampolineCollision">
+			<SpriteGroup name="doodleGroup" />
+			<SpriteGroup name="trampolineGroup" />
+		</CollisionGroup>
+
+		<CollisionGroup
+			subclass="vooga.games.doodlejump.collisions.DoodleToWhitePlatformCollision">
+			<SpriteGroup name="doodleGroup" />
+			<SpriteGroup name="whitePlatformGroup" />
+		</CollisionGroup>
+
+		<CollisionGroup
+			subclass="vooga.games.doodlejump.collisions.DoodleToMonsterCollision">
+			<SpriteGroup name="doodleGroup" />
+			<SpriteGroup name="monsterGroup" />
+		</CollisionGroup>
+	</CollisionGroups>
+
+	<Backgrounds>
+		<Visual name="soccerBackground" />
+	</Backgrounds>
+
+	<Music>
+		<Sound name="jumpSound" />
+		<Sound name="springSound" />
+	</Music>
+
+	<Map>
+
+	</Map>
+
+</Level>
