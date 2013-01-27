@@ -11,9 +11,10 @@ define(['player', 'platform'], function(Player, Platform) {
     this.player = new Player(this.el.find('.player'), this);
     this.platforms = [];
     this.createPlatform(10, 100, 100, 10);
-
-    // Cache a bound onFrame since we need it each frame.
+    
+    // Cache a bound onFrame and el.width() since we need it each frame.
     this.onFrame = this.onFrame.bind(this);
+    this.width = el.width();
   };
 
   Game.prototype.createPlatform = function(x, y, width, height) {
