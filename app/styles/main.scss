@@ -20,11 +20,13 @@
 
 .player {
   position: absolute;
-  left: 100px;
+  left: 0;
   bottom: 0;
-  background: url('../images/blue_monster_left.png') no-repeat;
-  width: 55px;
-  height: 69px;
+  width: 100px;
+  height: 97px;
+  margin-top: -100px;
+  margin-left: -48px;
+  background: url('../images/doodle_left.png') no-repeat;
 }
 
 .platform {
