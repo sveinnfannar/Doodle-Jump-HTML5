@@ -21,7 +21,12 @@
   position: absolute;
   left: 100px;
   bottom: 0;
+  background: url('../images/blue_monster_left.png') no-repeat;
+  width: 55px;
+  height: 69px;
+}
+
+.platform {
+  position: absolute;
   background: red;
-  width: 70px;
-  height: 100px;
 }

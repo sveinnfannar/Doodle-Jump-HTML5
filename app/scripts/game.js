@@ -1,6 +1,6 @@
 /*global define, $ */
 
-define(['player'], function(Player) {
+define(['player', 'platform'], function(Player, Platform) {
   /**
    * Main game class.
    * @param {Element} el DOM element containig the game.
@@ -9,9 +9,19 @@ define(['player'], function(Player) {
   var Game = function(el) {
     this.el = el;
     this.player = new Player(this.el.find('.player'));
+    this.platforms = [];
+    this.createPlatform(10, 10, 100, 10);
 
     // Cache a bound onFrame since we need it each frame.
     this.onFrame = this.onFrame.bind(this);
+  };
+
+
+  Game.prototype.createPlatform = function(x, y, width, height) {
+    var rect = {x: x, y: y, width: width, height: height},
+        platform = new Platform(rect);
+    this.platforms.push(platform);
+    this.el.append(platform.el);
   };
 
   /**
