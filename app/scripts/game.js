@@ -8,14 +8,13 @@ define(['player', 'platform'], function(Player, Platform) {
    */
   var Game = function(el) {
     this.el = el;
-    this.player = new Player(this.el.find('.player'));
+    this.player = new Player(this.el.find('.player'), this);
     this.platforms = [];
-    this.createPlatform(10, 10, 100, 10);
+    this.createPlatform(10, 100, 100, 10);
 
     // Cache a bound onFrame since we need it each frame.
     this.onFrame = this.onFrame.bind(this);
   };
-
 
   Game.prototype.createPlatform = function(x, y, width, height) {
     var rect = {x: x, y: y, width: width, height: height},
@@ -33,6 +32,8 @@ define(['player', 'platform'], function(Player, Platform) {
     this.lastFrame = now;
 
     this.player.onFrame(delta);
+
+    this.player.checkPlatforms(this.platforms);
 
     // Request next frame.
     requestAnimFrame(this.onFrame);

@@ -5,10 +5,10 @@ define [], ->
       @el = $('<div class="platform">')
       @el.css {
         left: rect.x
-        top: rect.y
+        bottom: rect.y
         width: rect.width
         height: rect.height
       }
-        
+
 
   return Platform

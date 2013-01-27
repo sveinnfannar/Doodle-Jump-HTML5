@@ -6,7 +6,7 @@ define ['controls'], (controls) ->
     speed: 400
     gravity: 3000
 
-    constructor: (el) ->
+    constructor: (el, @game) ->
       @el = el
       @pos =
         x: 0
@@ -33,6 +33,7 @@ define ['controls'], (controls) ->
         @jumping = true
 
       
+      oldY = @pos.y
       @pos.x += delta * @velocity.x
       @pos.y += delta * @velocity.y
 
@@ -40,6 +41,7 @@ define ['controls'], (controls) ->
       @velocity.x *= 0.85
       @velocity.y += delta * @gravity
 
+      @checkPlatforms oldY
       if @pos.y > 0
         @pos.y = 0
         @velocity.y = 0
@@ -47,5 +49,12 @@ define ['controls'], (controls) ->
       
       # Update UI
       @el.css '-webkit-transform', "translate(#{@pos.x}px,#{@pos.y}px)"
+
+    checkPlatforms: (oldY) ->
+      for platform in @game.platforms
+        if oldY < platform.rect.y and @pos.y >= platform.rect.y
+          @pos.y = platform.rect.y
+          @velocity.y = 0
+          @jumping = false
 
   return Player
