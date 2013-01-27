@@ -1,13 +1,12 @@
 define [], ->
   class Platform
     constructor: (rect) ->
-      @rect = rect
       @el = $('<div class="platform">')
+      @rect = rect
+      @rect.right = @rect.x + @el.width()
       @el.css {
         left: rect.x
-        bottom: rect.y
-        width: rect.width
-        height: rect.height
+        top: rect.y
       }
 
 
