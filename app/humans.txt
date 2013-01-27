@@ -3,11 +3,12 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Heiðar -- Master -- #derp
+    Svenni -- helper -- #svenni
 
 # THANKS
 
-    <name>
+    Heiðar
 
 # TECHNOLOGY COLOPHON
 
