@@ -35,3 +35,11 @@
   height: 23px;
   background: url('../images/green_platform.png') no-repeat;
 }
+
+.gameover {
+  position: absolute;
+  font: 40pt bold;
+  color: red;
+  left: 186px;
+  z-index: 999
+}

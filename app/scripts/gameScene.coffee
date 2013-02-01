@@ -1,12 +1,12 @@
-define ["platform", "player", "camera", "platformManager"], (Platform, Player, Camera, PlatformManager)->
+define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera, PlatformManager, GameOverScene)->
   class GameScene
-    constructor: (width, height)->
+    constructor: (@game)->
       @player = new Player($('<div class="player">'), this)
-      @camera = new Camera(height/2, height)
-      @platformManager = new PlatformManager(width, height)
+      @camera = new Camera(@game.height/2, @game.height)
+      @platformManager = new PlatformManager(@game.width, @game.height)
 
-      @width = width
-      @height = height
+      @width = @game.width
+      @height = @game.height
 
       @reset()
 
@@ -28,14 +28,14 @@ define ["platform", "player", "camera", "platformManager"], (Platform, Player, C
     update: (dt) ->
       @player.update dt
       @camera.update dt, @player
+      
+      if @player.pos.y > @camera.position + @game.height
+        @game.switchScene(new GameOverScene(@game, this))
 
     render: ->
       @player.render @camera
       @platformManager.render @camera
       
       # Request next frame.
-      
-
-
 
   return GameScene
