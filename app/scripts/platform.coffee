@@ -1,4 +1,7 @@
 define [], ->
+  Function::property = (prop, desc) ->
+    Object.defineProperty @prototype, prop, desc
+
   class Platform
     PLATFORM_WIDTH = 90 # A small quick-fix because @el.width() returns 0 in the constructor
 
@@ -10,6 +13,12 @@ define [], ->
         left: rect.x
         top: rect.y
       }
+
+    @property 'x',
+      get: -> @rect.x
+
+    @property 'y',
+      get: -> @rect.y
 
     render: (camera) ->
       @el.css $.fx.cssPrefix + 'transform', "translate(0px,#{-camera.position}px)"

@@ -28,6 +28,7 @@ define ["platform", "player", "camera", "platformManager"], (Platform, Player, C
     update: (dt) ->
       @player.update dt
       @camera.update dt, @player
+      @platformManager.update @camera
 
     render: ->
       @player.render @camera
