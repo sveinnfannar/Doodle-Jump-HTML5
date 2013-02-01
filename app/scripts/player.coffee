@@ -19,7 +19,7 @@ define ['controls'], (controls) ->
       @jumping = false
       @flip = 1
 
-    onFrame: (delta) ->
+    update: (delta) ->
       # Left and right movement
       if controls.keys.right
         @velocity.x += @SPEED
@@ -64,7 +64,8 @@ define ['controls'], (controls) ->
             @pos.y = platform.rect.y
             @velocity.y = 0
             @jumping = false
-    drawAt: (camera) ->
+
+    render: (camera) ->
       # Update UI
       @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y - camera.position}px) scale(#{@flip}, 1)"
 

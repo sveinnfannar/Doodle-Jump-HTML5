@@ -11,7 +11,7 @@ define [], ->
         top: rect.y
       }
 
-    drawAt: (camera) ->
+    render: (camera) ->
       @el.css $.fx.cssPrefix + 'transform', "translate(0px,#{-camera.position}px)"
 
   return Platform

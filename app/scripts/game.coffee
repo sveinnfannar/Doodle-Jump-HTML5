@@ -1,5 +1,5 @@
 #global define, $ 
-define ["player", "platform", "camera"], (Player, Platform, Camera) ->
+define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera, GameScene) ->
   
   ###
   Main game class.
@@ -8,53 +8,34 @@ define ["player", "platform", "camera"], (Player, Platform, Camera) ->
   ###
   Game = (el) ->
     @el = el
-    @player = new Player(@el.find(".player"), this)
-    @camera = new Camera(300, 600)
 
     # Cache a bound onFrame, el.width() and el.height() since we need them each frame.
     @onFrame = @onFrame.bind(this)
     @width = el.width()
     @height = el.height()
+    @active = false
+    @currentScene = null
 
-  Game::reset = ->
-    @player.pos =
-      x: @width/2
-      y: 550
-    @platforms = []
-    @addRandomPlatforms()
 
-  Game::createPlatform = (x, y) ->
-    rect =
-      x: x
-      y: y
-
-    platform = new Platform(rect)
-    @platforms.push platform
-    @el.append platform.el
-
-  Game::addRandomPlatforms = ->
-    # Create one platform under him
-    @createPlatform(@width/2 - 45, @height - 30)
-
-    # Create random platforms (this needs to be improved because of overlapping)
-    for i in [0..10]
-      @createPlatform Math.random()*(@width-90), Math.random()*(@height-30)
+  Game::switchScene = (scene) ->
+    @active = false
+    @el.empty()
+    (@el.append obj for obj in scene.buildScene())
+    @currentScene = scene
+    @active = true
   
   ###
   Runs every frame. Calculates a delta and allows each game entity to update itself.
   ###
   Game::onFrame = ->
-    now = +new Date() / 1000
-    delta = now - @lastFrame
-    @lastFrame = now
-    @player.onFrame delta
-    @player.checkPlatforms @platforms
-    @camera.update delta, @player
+    if @active
+      now = +new Date() / 1000
+      delta = now - @lastFrame
+      @lastFrame = now
+      @currentScene.onFrame delta
 
-    @player.drawAt @camera
-    platform.drawAt @camera for platform in @platforms
-    
-    # Request next frame.
+      
+      # Request next frame.
     requestAnimFrame @onFrame
   
   ###
@@ -65,7 +46,7 @@ define ["player", "platform", "camera"], (Player, Platform, Camera) ->
     @lastFrame = +new Date() / 1000
     requestAnimFrame @onFrame
 
-    @reset()
+    @switchScene(new GameScene(@width, @height))
   
   ###
   Cross browser RequestAnimationFrame
