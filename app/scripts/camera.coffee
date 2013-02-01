@@ -9,7 +9,6 @@ define [], ->
 
     update: (dt, player) ->
       #Update target based on current player position
-      console.log @position, @target, player.pos.y
       if player.pos.y < @position + @center
         @target = player.pos.y
       else

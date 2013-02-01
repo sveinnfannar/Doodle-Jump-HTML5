@@ -1,5 +1,5 @@
 #global define, $ 
-define ["player", "platform", "camera"], (Player, Platform, Camera) ->
+define ["player", "platform", "camera", "platformManager"], (Player, Platform, Camera, PlatformManager) ->
   
   ###
   Main game class.
@@ -8,37 +8,24 @@ define ["player", "platform", "camera"], (Player, Platform, Camera) ->
   ###
   Game = (el) ->
     @el = el
+    @width = el.width()
+    @height = el.height()
     @player = new Player(@el.find(".player"), this)
+    @platformManager = new PlatformManager(@el, @width, @height)
     @camera = new Camera(300, 600)
 
     # Cache a bound onFrame, el.width() and el.height() since we need them each frame.
     @onFrame = @onFrame.bind(this)
-    @width = el.width()
-    @height = el.height()
+    return
 
   Game::reset = ->
     @player.pos =
       x: @width/2
       y: 550
-    @platforms = []
-    @addRandomPlatforms()
 
-  Game::createPlatform = (x, y) ->
-    rect =
-      x: x
-      y: y
-
-    platform = new Platform(rect)
-    @platforms.push platform
-    @el.append platform.el
-
-  Game::addRandomPlatforms = ->
     # Create one platform under him
-    @createPlatform(@width/2 - 45, @height - 30)
-
-    # Create random platforms (this needs to be improved because of overlapping)
-    for i in [0..10]
-      @createPlatform Math.random()*(@width-90), Math.random()*(@height-30)
+    @platformManager.createPlatform(@width/2 - 45, @height - 30)
+    @platformManager.reset()
   
   ###
   Runs every frame. Calculates a delta and allows each game entity to update itself.
@@ -52,7 +39,7 @@ define ["player", "platform", "camera"], (Player, Platform, Camera) ->
     @camera.update delta, @player
 
     @player.drawAt @camera
-    platform.drawAt @camera for platform in @platforms
+    @platformManager.drawAt @camera
     
     # Request next frame.
     requestAnimFrame @onFrame
