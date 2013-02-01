@@ -12,7 +12,7 @@ define ['controls'], (controls) ->
       @flip = 1
       @pos =
         x: 0
-        y: 100
+        y: 500
       @velocity =
         x: 0
         y: 0
@@ -56,9 +56,6 @@ define ['controls'], (controls) ->
 
       # Check for collisions
       @checkPlatforms oldY
-      
-      # Update UI
-      @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y}px) scale(#{@flip}, 1)"
 
     checkPlatforms: (oldY) ->
       for platform in @game.platforms
@@ -67,5 +64,8 @@ define ['controls'], (controls) ->
             @pos.y = platform.rect.y
             @velocity.y = 0
             @jumping = false
+    drawAt: (camera) ->
+      # Update UI
+      @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y - camera.position}px) scale(#{@flip}, 1)"
 
   return Player

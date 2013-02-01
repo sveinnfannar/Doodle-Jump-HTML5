@@ -1,5 +1,5 @@
 #global define, $ 
-define ["player", "platform"], (Player, Platform) ->
+define ["player", "platform", "camera"], (Player, Platform, Camera) ->
   
   ###
   Main game class.
@@ -9,6 +9,7 @@ define ["player", "platform"], (Player, Platform) ->
   Game = (el) ->
     @el = el
     @player = new Player(@el.find(".player"), this)
+    @camera = new Camera(300, 600)
 
     # Cache a bound onFrame, el.width() and el.height() since we need them each frame.
     @onFrame = @onFrame.bind(this)
@@ -16,7 +17,7 @@ define ["player", "platform"], (Player, Platform) ->
     @height = el.height()
 
   Game::reset = ->
-    @player.pos = 
+    @player.pos =
       x: @width/2
       y: 550
     @platforms = []
@@ -48,6 +49,10 @@ define ["player", "platform"], (Player, Platform) ->
     @lastFrame = now
     @player.onFrame delta
     @player.checkPlatforms @platforms
+    @camera.update delta, @player
+
+    @player.drawAt @camera
+    platform.drawAt @camera for platform in @platforms
     
     # Request next frame.
     requestAnimFrame @onFrame
