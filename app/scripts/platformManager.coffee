@@ -15,7 +15,11 @@ define ["platform"], (Platform) ->
         @createPlatform Math.random()*(@screenWidth-90), Math.random()*(@screenHeight-30)
 
     drawAt: (camera) ->
+      console.log camera.position
       platform.drawAt camera for platform in @platforms
+
+    move: (camera) ->
+
 
     createPlatform: (x, y) ->
       rect =

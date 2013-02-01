@@ -13,15 +13,12 @@ define [], ->
         @target = player.pos.y - @center
       else
         @target = @position
-      
 
       #target is always lower than position
       diff = @position - @target
-      console.log diff
       
       #Move camera further the further from our target we are
       dist = diff * 0.01 * dt
-      console.log dist
 
       #Make sure we always travel a reasonable amount
       if dist < MIN_CAMERA_MOVEMENT
