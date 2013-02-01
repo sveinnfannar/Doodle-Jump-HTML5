@@ -58,7 +58,7 @@ define ['controls'], (controls) ->
       @checkPlatforms oldY
 
     checkPlatforms: (oldY) ->
-      for platform in @game.platforms
+      for platform in @game.platformManager.platforms
         if @pos.y > platform.rect.y and platform.rect.y >= oldY
           if @pos.x > platform.rect.x - @PLATFORM_OFFSET and @pos.x < platform.rect.right + @PLATFORM_OFFSET
             @pos.y = platform.rect.y

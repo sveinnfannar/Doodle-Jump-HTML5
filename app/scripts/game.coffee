@@ -33,9 +33,8 @@ define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera,
       delta = now - @lastFrame
       @lastFrame = now
       @currentScene.onFrame delta
-
-      
-      # Request next frame.
+    
+    # Request next frame.
     requestAnimFrame @onFrame
   
   ###

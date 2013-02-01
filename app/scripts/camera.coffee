@@ -13,7 +13,6 @@ define [], ->
         @target = player.pos.y - @center
       else
         @target = @position
-      
 
       #target is always lower than position
       diff = @position - @target
