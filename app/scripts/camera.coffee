@@ -11,11 +11,12 @@ define [], ->
       #Update target based on current player position
       console.log @position, @target, player.pos.y
       if player.pos.y < @position + @center
-        @target = @position - @center
+        @target = player.pos.y
       else
-        @target = player.pos.y - @center
-
-      @target -= @center
+        @target = @position
+      
+      @position = @target
+      return
 
       #target is always lower than position
       diff = @position - @target
