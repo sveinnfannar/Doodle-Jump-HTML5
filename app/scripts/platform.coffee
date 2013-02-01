@@ -9,5 +9,7 @@ define [], ->
         top: rect.y
       }
 
+    drawAt: (camera) ->
+      @el.css $.fx.cssPrefix + 'transform', "translate(0px,#{-camera.position}px)"
 
   return Platform
