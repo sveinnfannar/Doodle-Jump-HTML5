@@ -16,6 +16,7 @@
   border: 1px solid;
   width: 532px;
   height: 600px;
+  overflow: hidden;
 }
 
 .player {
@@ -41,5 +42,6 @@
   font: 40pt bold;
   color: red;
   left: 186px;
-  z-index: 999
+  z-index: 999;
+  background-color: rgba(0, 180, 180, 0.9);
 }
