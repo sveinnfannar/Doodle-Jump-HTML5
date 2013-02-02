@@ -2,7 +2,7 @@ define ['controls'], (controls) ->
   class Player
 
     SPEED: 70
-    JUMP_VELOCITY: 900
+    JUMP_VELOCITY: 1100
     MAX_SPEED: 400
     GRAVITY: 3000
     PLATFORM_OFFSET: 10
