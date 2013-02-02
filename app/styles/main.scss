@@ -18,7 +18,7 @@
   position: relative;
   border: 1px solid;
   width: 532px;
-  height: 600px;
+  min-height: 100%;
   overflow: hidden;
   z-index: -1;
 }
@@ -27,12 +27,8 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 66px;
-  height: 55px;
-  margin-top: -70px;
-  margin-left: -33px;
   background: url('../images/goat.png') no-repeat;
-  background-size: 66px 55px;
+  background-size: cover;
   z-index: 3;
 
   div {margin: 0; padding: 0;}
@@ -40,7 +36,7 @@
 
   .front_right_leg, .back_right_leg, .front_left_leg, .back_left_leg {
     background: url('../images/leg.png') no-repeat;
-    background-size: 12px 23px;
+    background-size: cover;
     width: 12px;
     height: 23px;
     position: absolute;
@@ -83,16 +79,14 @@
 
 .platform {
   position: absolute;
-  height: 46px;
-  width: 41px;
   background: url('../images/rock1.png') no-repeat;
-  background-size: 46px 41px;
+  background-size: cover;
   z-index: 2;
 }
 
 .gameover {
   position: absolute;
-  font: 40pt bold;
+  font: bold;
   color: red;
   left: 186px;
   z-index: 999;
