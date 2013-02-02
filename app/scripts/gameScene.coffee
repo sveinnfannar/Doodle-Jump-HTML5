@@ -3,7 +3,7 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
     constructor: (@game)->
       @width = @game.width
       @height = @game.height
-      @player = new Player($('<div class="player">'), this)
+      @player = new Player(this)
       @camera = new Camera(@game.height/2, @game.height)
       @platformManager = new PlatformManager(this)
       @reset()

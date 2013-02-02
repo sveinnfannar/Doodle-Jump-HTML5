@@ -2,13 +2,20 @@ define ['controls'], (controls) ->
   class Player
 
     SPEED: 70
-    JUMP_VELOCITY: 1100
+    JUMP_VELOCITY: 1000
     MAX_SPEED: 400
     GRAVITY: 3000
     PLATFORM_OFFSET: 10
 
-    constructor: (el, @gameScene) ->
-      @el = el
+    constructor: (@gameScene) ->
+      # Set up the elements
+      @el = $('.player')
+      @legEls =
+        frontRight: $('.front_right_leg')
+        backRight: $('.back_right_leg')
+        frontLeft: $('.front_left_leg')
+        backLeft: $('.back_left_leg')
+
       @flip = 1
       @pos =
         x: 0
@@ -31,10 +38,10 @@ define ['controls'], (controls) ->
       # Left and right movement
       if controls.keys.right
         @velocity.x += @SPEED
-        @flip = -1
+        @flip = 1
       if controls.keys.left
         @velocity.x -= @SPEED
-        @flip = 1
+        @flip = -1
 
       # Cap MAX_SPEED
       if @velocity.x < -@MAX_SPEED
@@ -76,5 +83,6 @@ define ['controls'], (controls) ->
     render: (camera) ->
       # Update UI
       @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y - camera.position}px) scale(#{@flip}, 1)"
+      #this.el.toggleClass 'jumping', @jumping
 
   return Player

@@ -1,6 +1,6 @@
 define ["platform"], (Platform) ->
   class PlatformManager
-    AVERAGE_PLATFORM_DISTANCE = 30
+    AVERAGE_PLATFORM_DISTANCE = 40
     PLATFORM_WIDTH = 90 # A small quick-fix because @el.width() returns 0 in the constructor
     HALF_PLATFORM_WIDTH = 45
     PLATFORM_X_VARIANCE = 20
