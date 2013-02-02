@@ -1,22 +1,33 @@
 define ["platform"], (Platform) ->
   class PlatformManager
     AVERAGE_PLATFORM_DISTANCE = 30
+    PLATFORM_WIDTH = 90 # A small quick-fix because @el.width() returns 0 in the constructor
+    HALF_PLATFORM_WIDTH = 45
+    PLATFORM_X_VARIANCE = 20
+    PLATFORM_Y_VARIANCE = 20
 
-    constructor: (screenWidth, screenHeight) ->
+    constructor: (@gameScene) ->
       @platforms = []
-      @screenWidth = screenWidth
-      @screenHeight = screenHeight
+      @screenWidth = @gameScene.width
+      @screenHeight = @gameScene.height
       @previousCameraPosition = NaN
+      ratio = @gameScene.game.ratio
+      AVERAGE_PLATFORM_DISTANCE *= ratio.y
+      PLATFORM_WIDTH *= ratio.x
+      HALF_PLATFORM_WIDTH *= ratio.x
+      PLATFORM_X_VARIANCE *= ratio.x
+      PLATFORM_Y_VARIANCE *= ratio.y
+      return
 
     reset: ->
       @addRandomPlatforms()
 
     addRandomPlatforms: ->
-      previousX = @screenWidth/2 - 45
+      previousX = @screenWidth/2 - HALF_PLATFORM_WIDTH
       for y in [@screenHeight/AVERAGE_PLATFORM_DISTANCE..0]
-        x = (Math.sin(y) * @screenWidth/4 + previousX) + 20 * (Math.random() - 0.5)
+        x = (Math.sin(y) * @screenWidth/4 + previousX) + PLATFORM_X_VARIANCE * (Math.random() - 0.5)
         @createPlatform x,
-                        Math.random()*20 + y*AVERAGE_PLATFORM_DISTANCE
+                        Math.random()*PLATFORM_Y_VARIANCE + y*AVERAGE_PLATFORM_DISTANCE
         previousX = x
 
     render: (camera) ->
@@ -36,6 +47,7 @@ define ["platform"], (Platform) ->
       rect =
         x: x
         y: y
+        right: x + PLATFORM_WIDTH
 
       platform = new Platform(rect)
       @platforms.push platform

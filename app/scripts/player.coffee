@@ -7,17 +7,25 @@ define ['controls'], (controls) ->
     GRAVITY: 3000
     PLATFORM_OFFSET: 10
 
-    constructor: (el, @game) ->
+    constructor: (el, @gameScene) ->
       @el = el
       @flip = 1
       @pos =
         x: 0
-        y: 500
+        y: 0
       @velocity =
         x: 0
         y: 0
       @jumping = false
       @flip = 1
+
+      ratio = @gameScene.game.ratio
+      @SPEED *= ratio.x
+      @JUMP_VELOCITY *= ratio.y
+      @MAX_SPEED *= ratio.x
+      @GRAVITY *= ratio.y
+      @PLATFORM_OFFSET *= ratio.x
+      return
 
     update: (delta) ->
       # Left and right movement
@@ -36,8 +44,8 @@ define ['controls'], (controls) ->
 
       # Warp the x-axis
       if @pos.x < 0
-        @pos.x = @game.width
-      else if @pos.x > @game.width
+        @pos.x = @gameScene.width
+      else if @pos.x > @gameScene.width
         @pos.x = 0
 
       # Jump
@@ -58,7 +66,7 @@ define ['controls'], (controls) ->
       @checkPlatforms oldY
 
     checkPlatforms: (oldY) ->
-      for platform in @game.platformManager.platforms
+      for platform in @gameScene.platformManager.platforms
         if @pos.y > platform.rect.y and platform.rect.y >= oldY
           if @pos.x > platform.rect.x - @PLATFORM_OFFSET and @pos.x < platform.rect.right + @PLATFORM_OFFSET
             @pos.y = platform.rect.y
