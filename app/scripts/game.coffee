@@ -45,7 +45,7 @@ define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera,
     @lastFrame = +new Date() / 1000
     requestAnimFrame @onFrame
 
-    @switchScene(new GameScene(@width, @height))
+    @switchScene(new GameScene(this))
   
   ###
   Cross browser RequestAnimationFrame
