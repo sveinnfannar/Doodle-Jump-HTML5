@@ -9,8 +9,8 @@ define ["player", "platform", "camera", "gameScene", "controls"], (Player, Platf
   Game = (el) ->
     @el = el
     @width = el.width()
-    @height = screen.height#el.height()
-    @DESIGN_SIZE = {x: 360, y: 600}
+    @height = window.innerHeight #el.height()
+    @DESIGN_SIZE = {x: 550, y: 600}
 
     @ratio = @height / @DESIGN_SIZE.y
     el.width(@DESIGN_SIZE.x * @ratio)
