@@ -1,5 +1,7 @@
 define ["platform"], (Platform) ->
   class PlatformManager
+    AVERAGE_PLATFORM_DISTANCE = 30
+
     constructor: (screenWidth, screenHeight) ->
       @platforms = []
       @screenWidth = screenWidth
@@ -9,9 +11,12 @@ define ["platform"], (Platform) ->
       @addRandomPlatforms()
 
     addRandomPlatforms: ->
-      # Create random platforms (this needs to be improved because of overlapping)
-      for y in [@screenHeight/10..0]
-        @createPlatform Math.random()*(@screenWidth-90), Math.random()*10 + y*10
+      previousX = @screenWidth/2 - 45
+      for y in [@screenHeight/AVERAGE_PLATFORM_DISTANCE..0]
+        x = (Math.sin(y) * @screenWidth/4 + previousX) + 20 * (Math.random() - 0.5)
+        @createPlatform x,
+                        Math.random()*20 + y*AVERAGE_PLATFORM_DISTANCE
+        previousX = x
 
     render: (camera) ->
       platform.render camera for platform in @platforms
