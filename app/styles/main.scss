@@ -15,7 +15,7 @@
   position: relative;
   border: 1px solid;
   width: 532px;
-  height: 600px;
+  min-height: 100%;
   overflow: hidden;
 }
 
@@ -23,22 +23,20 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 100px;
-  height: 97px;
-  margin-top: -95px;
-  margin-left: -48px;
   background: url('../images/doodle_left.png') no-repeat;
+  background-size: cover;
 }
 
 .platform {
   position: absolute;
   height: 23px;
   background: url('../images/green_platform.png') no-repeat;
+  background-size: cover;
 }
 
 .gameover {
   position: absolute;
-  font: 40pt bold;
+  font: bold;
   color: red;
   left: 186px;
   z-index: 999;

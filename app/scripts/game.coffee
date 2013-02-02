@@ -1,5 +1,5 @@
 #global define, $ 
-define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera, GameScene) ->
+define ["player", "platform", "camera", "gameScene", "controls"], (Player, Platform, Camera, GameScene, controls) ->
   
   ###
   Main game class.
@@ -9,9 +9,13 @@ define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera,
   Game = (el) ->
     @el = el
     @width = el.width()
-    @height = el.height()
-    @DESIGN_SIZE = {x: 532, y: 600}
-    @ratio = {x: @width / @DESIGN_SIZE.x, y: @height / @DESIGN_SIZE.y}
+    @height = screen.height#el.height()
+    @DESIGN_SIZE = {x: 360, y: 600}
+
+    @ratio = @height / @DESIGN_SIZE.y
+    el.width(@DESIGN_SIZE.x * @ratio)
+    @width = el.width()
+    console.log @width, @height, @DESIGN_SIZE, @ratio
 
     # Cache a bound onFrame, el.width() and el.height() since we need them each frame.
     @onFrame = @onFrame.bind(this)
@@ -34,6 +38,7 @@ define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera,
     if @active
       now = +new Date() / 1000
       delta = now - @lastFrame
+      controls.onFrame delta
       @lastFrame = now
       @currentScene.onFrame delta
     

@@ -1,29 +1,35 @@
 define ["platform"], (Platform) ->
   class PlatformManager
-    PLATFORMS_ON_SCREEN = 15
+    AVERAGE_PLATFORM_DISTANCE = 30
+    PLATFORM_SIZE = {x: 90, y: 23}
+    HALF_PLATFORM_WIDTH = PLATFORM_SIZE.x / 2
+    PLATFORM_X_VARIANCE = 20
+    PLATFORM_Y_VARIANCE = 20
 
-    constructor: (screenWidth, screenHeight) ->
+    constructor: (@gameScene) ->
       @platforms = []
-      @screenWidth = screenWidth
-      @screenHeight = screenHeight
+      @screenWidth = @gameScene.width
+      @screenHeight = @gameScene.height
       @previousCameraPosition = NaN
-      @lastCreatedPlatformPosition = {x: @screenWidth/2, y:@screenHeight}
-
       ratio = @gameScene.game.ratio
-      PLATFORMS_ON_SCREEN *= ratio.x
+      AVERAGE_PLATFORM_DISTANCE *= ratio
+      PLATFORM_SIZE.x *= ratio
+      PLATFORM_SIZE.y *= ratio
+      HALF_PLATFORM_WIDTH *= ratio
+      PLATFORM_X_VARIANCE *= ratio
+      PLATFORM_Y_VARIANCE *= ratio
+      return
 
     reset: ->
       @addRandomPlatforms()
 
     addRandomPlatforms: ->
-      for i in [0..PLATFORMS_ON_SCREEN]
-        x = @lastCreatedPlatformPosition.x
-        offset = (if Math.random() < 0.5 then -1 else 1) * (50 + Math.random() * 50)
-        if x + offset < 45 #or x + offset > @screenWidth - 45
-          offset *= -1
-        x += offset
-        @createPlatform @lastCreatedPlatformPosition.x + (if Math.random() < 0.5 then -1 else 1) * (50 + Math.random() * 50),
-                        @lastCreatedPlatformPosition.y - (@screenHeight/PLATFORMS_ON_SCREEN)
+      previousX = @screenWidth/2 - HALF_PLATFORM_WIDTH
+      for y in [@screenHeight/AVERAGE_PLATFORM_DISTANCE..0]
+        x = (Math.sin(y) * @screenWidth/4 + previousX) + PLATFORM_X_VARIANCE * (Math.random() - 0.5)
+        @createPlatform x,
+                        Math.random()*PLATFORM_Y_VARIANCE + y*AVERAGE_PLATFORM_DISTANCE
+        previousX = x
 
     render: (camera) ->
       if camera.position != @previousCameraPosition
@@ -33,16 +39,18 @@ define ["platform"], (Platform) ->
     update: (camera) ->
       first = @platforms[0]
       while first.y - camera.position > @screenHeight
-        first.y -= @screenHeight
+        first.y -= @screenHeight + 20
+        first.x = Math.random() * (@screenWidth + PLATFORM_SIZE.x) - PLATFORM_SIZE.x
         @platforms.shift()
         @platforms.push first
         first = @platforms[0]
 
     createPlatform: (x, y) ->
-      position =
+      rect =
         x: x
         y: y
+        right: x + PLATFORM_SIZE.x
+        bottom: y + PLATFORM_SIZE.y
 
-      platform = new Platform(position)
+      platform = new Platform(rect)
       @platforms.push platform
-      @lastCreatedPlatformPosition  = position
