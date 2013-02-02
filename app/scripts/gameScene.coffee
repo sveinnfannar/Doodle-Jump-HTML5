@@ -4,15 +4,12 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
       @player = new Player($('<div class="player">'), this)
       @camera = new Camera(@game.height/2, @game.height)
       @platformManager = new PlatformManager(@game.width, @game.height)
-
       @width = @game.width
       @height = @game.height
-
       @reset()
 
     buildScene: ->
       return [@player.el].concat (platform.el for platform in @platformManager.platforms)
-
 
     reset: ->
       @player.pos =
@@ -35,7 +32,7 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
     render: ->
       @player.render @camera
       @platformManager.render @camera
-      
-      # Request next frame.
+      # Move background
+      @game.el.css "background-position", "0px #{-@camera.position}px"
 
   return GameScene
