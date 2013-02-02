@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "_animation";
 
 .container {
   bottom: 0;
@@ -11,27 +12,76 @@
 }
 
 .game {
-  background: url('../images/background.png');
+  background: url('../images/background.png') repeat;
+  
+  background-size: 320px 320px;
   position: relative;
   border: 1px solid;
   width: 532px;
   min-height: 100%;
   overflow: hidden;
+  z-index: -1;
 }
 
 .player {
   position: absolute;
   left: 0;
   top: 0;
-  background: url('../images/doodle_left.png') no-repeat;
+  background: url('../images/goat.png') no-repeat;
   background-size: cover;
+  z-index: 3;
+
+  div {margin: 0; padding: 0;}
+  div div {background: #A4CA39; position: relative;}
+
+  .front_right_leg, .back_right_leg, .front_left_leg, .back_left_leg {
+    background: url('../images/leg.png') no-repeat;
+    background-size: cover;
+    width: 12px;
+    height: 23px;
+    position: absolute;
+    top: 50px;
+  }
+
+  .front_right_leg { left: 4px; @include transform(rotate(10deg)); }
+  .front_left_leg { left: 7px }
+  .back_right_leg { right: 33px; @include transform(rotate(-10deg)); }
+  .back_left_leg { right: 30px }
+
+  &.jumping, .front_left_leg, .back_left_leg {
+    @include transform-origin(50%, 0);
+    @include animation(player-jumping-left 0.15s linear infinite alternate)
+  }
+
+  &.jumping, .front_right_leg, .back_right_leg {
+    @include transform-origin(50%, 0);
+    @include animation(player-jumping-right 0.4s linear infinite alternate)
+  }
+}
+
+@include keyframes(player-jumping-left) {
+  from {
+    @include transform(rotate(60deg));
+  }
+  to {
+    @include transform(rotate(-60deg));
+  }
+}
+
+@include keyframes(player-jumping-right) {
+  from {
+    @include transform(rotate(-60deg));
+  }
+  to {
+    @include transform(rotate(60deg));
+  }
 }
 
 .platform {
   position: absolute;
-  height: 23px;
-  background: url('../images/green_platform.png') no-repeat;
+  background: url('../images/rock1.png') no-repeat;
   background-size: cover;
+  z-index: 2;
 }
 
 .gameover {

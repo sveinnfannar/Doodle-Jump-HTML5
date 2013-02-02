@@ -2,16 +2,28 @@ define ['controls'], (controls) ->
   class Player
 
     SPEED: 70
-    JUMP_VELOCITY: 1100
+    JUMP_VELOCITY: 1000
     MAX_SPEED: 400
     GRAVITY: 3000
     PLATFORM_OFFSET: 10
     DRAG: 0.85
-    PLAYER_SIZE: {x: 100, y: 97}
-    PLAYER_MARGINS: {top: -95, left:-48}
+    PLAYER_SIZE: {x: 66, y: 55}
+    PLAYER_MARGINS: {top: -70, left:-33}
 
-    constructor: (el, @gameScene) ->
-      @el = el
+    constructor: (@gameScene) ->
+      # Set up the elements
+      @el = $('<div class="player">
+        <div class="front_right_leg"></div>
+        <div class="front_left_leg"></div>
+        <div class="back_right_leg"></div>
+        <div class="back_left_leg"></div>
+        </div>')
+      @legEls =
+        frontRight: $('.front_right_leg')
+        backRight: $('.back_right_leg')
+        frontLeft: $('.front_left_leg')
+        backLeft: $('.back_left_leg')
+
       @flip = 1
       @pos =
         x: 0
@@ -32,9 +44,9 @@ define ['controls'], (controls) ->
       @PLAYER_SIZE.y *= ratio
       @PLAYER_MARGINS.top *= ratio
       @PLAYER_MARGINS.left *= ratio
-      el.width(@PLAYER_SIZE.x)
-      el.height(@PLAYER_SIZE.y)
-      el.css {
+      @el.width(@PLAYER_SIZE.x)
+      @el.height(@PLAYER_SIZE.y)
+      @el.css {
         'margin-top': "#{@PLAYER_MARGINS.top}px",
         'margin-left': "#{@PLAYER_MARGINS.left}px"
       }
@@ -42,13 +54,12 @@ define ['controls'], (controls) ->
 
     update: (delta) ->
       # Left and right movement
-
       if controls.inputVector.x != 0
         @velocity.x += @SPEED * controls.inputVector.x
         if controls.inputVector.x > 0
-          @flip = -1
-        else
           @flip = 1
+        else
+          @flip = -1
 
       # Cap MAX_SPEED
       if @velocity.x < -@MAX_SPEED
