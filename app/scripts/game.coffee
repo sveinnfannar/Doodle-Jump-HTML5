@@ -8,13 +8,16 @@ define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera,
   ###
   Game = (el) ->
     @el = el
+    @width = el.width()
+    @height = el.height()
+    @DESIGN_SIZE = {x: 532, y: 600}
+    @ratio = {x: @width / @DESIGN_SIZE.x, y: @height / @DESIGN_SIZE.y}
 
     # Cache a bound onFrame, el.width() and el.height() since we need them each frame.
     @onFrame = @onFrame.bind(this)
-    @width = el.width()
-    @height = el.height()
     @active = false
     @currentScene = null
+    return
 
 
   Game::switchScene = (scene) ->

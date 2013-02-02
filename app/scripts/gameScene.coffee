@@ -1,11 +1,11 @@
 define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera, PlatformManager, GameOverScene)->
   class GameScene
     constructor: (@game)->
-      @player = new Player($('<div class="player">'), this)
-      @camera = new Camera(@game.height/2, @game.height)
-      @platformManager = new PlatformManager(@game.width, @game.height)
       @width = @game.width
       @height = @game.height
+      @player = new Player($('<div class="player">'), this)
+      @camera = new Camera(@game.height/2, @game.height)
+      @platformManager = new PlatformManager(this)
       @reset()
 
     buildScene: ->
@@ -14,7 +14,7 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
     reset: ->
       @player.pos =
         x: @width/2
-        y: 550
+        y: (5.5 * @height) / 6
       @platformManager.createPlatform(@width/2, @height - 30)
       @platformManager.reset()
 

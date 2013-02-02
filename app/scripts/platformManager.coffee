@@ -1,6 +1,5 @@
 define ["platform"], (Platform) ->
   class PlatformManager
-    AVERAGE_PLATFORM_DISTANCE = 30
     PLATFORMS_ON_SCREEN = 15
 
     constructor: (screenWidth, screenHeight) ->
@@ -9,6 +8,9 @@ define ["platform"], (Platform) ->
       @screenHeight = screenHeight
       @previousCameraPosition = NaN
       @lastCreatedPlatformPosition = {x: @screenWidth/2, y:@screenHeight}
+
+      ratio = @gameScene.game.ratio
+      PLATFORMS_ON_SCREEN *= ratio.x
 
     reset: ->
       @addRandomPlatforms()
