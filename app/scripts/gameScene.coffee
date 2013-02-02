@@ -15,7 +15,7 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
       @player.pos =
         x: @width/2
         y: 550
-      @platformManager.createPlatform(@width/2 - 45, @height - 30)
+      @platformManager.createPlatform(@width/2, @height - 30)
       @platformManager.reset()
 
     onFrame: (dt) ->

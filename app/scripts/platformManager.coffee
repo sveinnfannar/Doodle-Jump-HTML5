@@ -1,23 +1,27 @@
 define ["platform"], (Platform) ->
   class PlatformManager
     AVERAGE_PLATFORM_DISTANCE = 30
+    PLATFORMS_ON_SCREEN = 15
 
     constructor: (screenWidth, screenHeight) ->
       @platforms = []
       @screenWidth = screenWidth
       @screenHeight = screenHeight
       @previousCameraPosition = NaN
+      @lastCreatedPlatformPosition = {x: @screenWidth/2, y:@screenHeight}
 
     reset: ->
       @addRandomPlatforms()
 
     addRandomPlatforms: ->
-      previousX = @screenWidth/2 - 45
-      for y in [@screenHeight/AVERAGE_PLATFORM_DISTANCE..0]
-        x = (Math.sin(y) * @screenWidth/4 + previousX) + 20 * (Math.random() - 0.5)
-        @createPlatform x,
-                        Math.random()*20 + y*AVERAGE_PLATFORM_DISTANCE
-        previousX = x
+      for i in [0..PLATFORMS_ON_SCREEN]
+        x = @lastCreatedPlatformPosition.x
+        offset = (if Math.random() < 0.5 then -1 else 1) * (50 + Math.random() * 50)
+        if x + offset < 45 #or x + offset > @screenWidth - 45
+          offset *= -1
+        x += offset
+        @createPlatform @lastCreatedPlatformPosition.x + (if Math.random() < 0.5 then -1 else 1) * (50 + Math.random() * 50),
+                        @lastCreatedPlatformPosition.y - (@screenHeight/PLATFORMS_ON_SCREEN)
 
     render: (camera) ->
       if camera.position != @previousCameraPosition
@@ -33,9 +37,10 @@ define ["platform"], (Platform) ->
         first = @platforms[0]
 
     createPlatform: (x, y) ->
-      rect =
+      position =
         x: x
         y: y
 
-      platform = new Platform(rect)
+      platform = new Platform(position)
       @platforms.push platform
+      @lastCreatedPlatformPosition  = position

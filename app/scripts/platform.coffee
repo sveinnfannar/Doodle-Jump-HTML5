@@ -3,14 +3,15 @@ define [], ->
     Object.defineProperty @prototype, prop, desc
 
   class Platform
-    PLATFORM_WIDTH = 90 # A small quick-fix because @el.width() returns 0 in the constructor
-
     constructor: (rect) ->
+      @PLATFORM_WIDTH = 90 # A small quick-fix because @el.width() returns 0 in the constructor
       @el = $('<div class="platform">')
       @rect = rect
-      @rect.right = @rect.x + PLATFORM_WIDTH
+      @rect.right = @rect.x + @PLATFORM_WIDTH/2
+      @rect.left = @rect.x - @PLATFORM_WIDTH/2
+      console.log @rect
       @el.css {
-        left: rect.x
+        left: rect.left
       }
 
     @property 'x',
