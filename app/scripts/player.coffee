@@ -5,7 +5,7 @@ define ['controls'], (controls) ->
     JUMP_VELOCITY: 1000
     MAX_SPEED: 400
     GRAVITY: 3000
-    PLATFORM_OFFSET: 10
+    PLATFORM_OFFSET: 5
     DRAG: 0.85
     PLAYER_SIZE: {x: 66, y: 55}
     PLAYER_MARGINS: {top: -70, left:-33}

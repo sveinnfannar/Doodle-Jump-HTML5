@@ -7,6 +7,7 @@ define [], ->
     constructor: (rect) ->
       @el = $('<div class="platform">')
       @rect = rect
+      @rect.left = @rect.x
       @width = rect.right - rect.x
       @height = rect.bottom - rect.y
       @el.css {
