@@ -33,6 +33,6 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
       @player.render @camera
       @platformManager.render @camera
       # Move background
-      @game.el.css "background-position", "0px #{-@camera.position}px"
+      @game.el.css "background-position", "0px #{-@camera.position*0.4}px"
 
   return GameScene
