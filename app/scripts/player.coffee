@@ -29,12 +29,13 @@ define ['controls'], (controls) ->
 
     update: (delta) ->
       # Left and right movement
-      if controls.keys.right
-        @velocity.x += @SPEED
-        @flip = -1
-      if controls.keys.left
-        @velocity.x -= @SPEED
-        @flip = 1
+
+      if controls.inputVector.x != 0
+        @velocity.x += @SPEED * controls.inputVector.x
+        if controls.inputVector.x > 0
+          @flip = -1
+        else
+          @flip = 1
 
       # Cap MAX_SPEED
       if @velocity.x < -@MAX_SPEED

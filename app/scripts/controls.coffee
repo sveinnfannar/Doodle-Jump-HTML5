@@ -17,7 +17,7 @@ define [], ->
       $(window)
         .on('keydown', @onKeyDown.bind(@))
         .on('keyup', @onKeyUp.bind(@))
-        .on('deviceorientation', @onOrientation)
+        .on('deviceorientation', @onOrientation.bind(@))
 
     onKeyDown: (e) ->
       if e.keyCode of @KEYS
@@ -30,7 +30,7 @@ define [], ->
     onFrame: (dt) ->
       if @keys.right
         @inputVector.x = 1
-      if @keys.left
+      else if @keys.left
         @inputVector.x = -1
       else
         @inputVector.x = 0
@@ -41,9 +41,14 @@ define [], ->
     onOrientation: (e) ->
       degree = e.gamma
       if window.orientation
+        alert window.orientation
         direction = window.orientation / 90
         degree = direction * e.beta
       speed = degree / FULL_ANGLE
-      @tilt = Math.min(-1, Math.max(1, speed))
+      if speed > 1
+        speed = 1
+      else if speed < -1
+        speed = -1
+      @tilt = speed
 
   return new Controls

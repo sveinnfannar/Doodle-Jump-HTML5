@@ -1,5 +1,5 @@
 #global define, $ 
-define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera, GameScene) ->
+define ["player", "platform", "camera", "gameScene", "controls"], (Player, Platform, Camera, GameScene, controls) ->
   
   ###
   Main game class.
@@ -34,6 +34,7 @@ define ["player", "platform", "camera", "gameScene"], (Player, Platform, Camera,
     if @active
       now = +new Date() / 1000
       delta = now - @lastFrame
+      controls.onFrame delta
       @lastFrame = now
       @currentScene.onFrame delta
     
