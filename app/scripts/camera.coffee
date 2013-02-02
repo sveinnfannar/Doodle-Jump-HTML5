@@ -1,6 +1,6 @@
 define [], ->
   class Camera
-    MIN_CAMERA_MOVEMENT = 1
+    MIN_CAMERA_MOVEMENT = 2
 
     constructor: (y, screen_size) ->
       @center = screen_size / 2
@@ -18,7 +18,7 @@ define [], ->
       diff = @position - @target
       
       #Move camera further the further from our target we are
-      dist = diff * 0.01 * dt
+      dist = diff * 0.08
 
       #Make sure we always travel a reasonable amount
       if dist < MIN_CAMERA_MOVEMENT
