@@ -9,7 +9,6 @@ define [], ->
       @rect = rect
       @el.css {
         left: rect.x
-        width: rect.right - rect.x
       }
 
     @property 'x',
