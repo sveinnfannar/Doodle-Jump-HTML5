@@ -38,7 +38,8 @@ define ["platform"], (Platform) ->
     update: (camera) ->
       first = @platforms[0]
       while first.y - camera.position > @screenHeight
-        first.y -= @screenHeight
+        first.y -= @screenHeight + 20
+        first.x = Math.random() * @screenWidth
         @platforms.shift()
         @platforms.push first
         first = @platforms[0]
