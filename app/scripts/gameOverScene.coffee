@@ -1,13 +1,18 @@
 define [], ->
   class GameOverScene
-    END_TIME = 250
+    END_TIME = 200
     SCROLL_SPEED = 400
 
     constructor: (@game, @gameScene) ->
       @time = 0
       @gameover = $('<div class="gameover">GAME<br />OVER</div>')
-      END_TIME *= @game.ratio.y
-      SCROLL_SPEED *= @game.ratio.y
+      width = @game.width / 6
+      @gameover.css {
+        'left': "#{@game.width / 2 - width*3/2}px",
+        'font-size': "#{width}px"
+      }
+      END_TIME *= @game.ratio
+      SCROLL_SPEED *= @game.ratio
       console.log "game over"
     
     buildScene: ->

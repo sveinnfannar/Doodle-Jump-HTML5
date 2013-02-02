@@ -6,6 +6,9 @@ define ['controls'], (controls) ->
     MAX_SPEED: 400
     GRAVITY: 3000
     PLATFORM_OFFSET: 10
+    DRAG: 0.85
+    PLAYER_SIZE: {x: 100, y: 97}
+    PLAYER_MARGINS: {top: -95, left:-48}
 
     constructor: (el, @gameScene) ->
       @el = el
@@ -20,11 +23,21 @@ define ['controls'], (controls) ->
       @flip = 1
 
       ratio = @gameScene.game.ratio
-      @SPEED *= ratio.x
-      @JUMP_VELOCITY *= ratio.y
-      @MAX_SPEED *= ratio.x
-      @GRAVITY *= ratio.y
-      @PLATFORM_OFFSET *= ratio.x
+      @SPEED *= ratio
+      @JUMP_VELOCITY *= ratio
+      @MAX_SPEED *= ratio
+      @GRAVITY *= ratio
+      @PLATFORM_OFFSET *= ratio
+      @PLAYER_SIZE.x *= ratio
+      @PLAYER_SIZE.y *= ratio
+      @PLAYER_MARGINS.top *= ratio
+      @PLAYER_MARGINS.left *= ratio
+      el.width(@PLAYER_SIZE.x)
+      el.height(@PLAYER_SIZE.y)
+      el.css {
+        'margin-top': "#{@PLAYER_MARGINS.top}px",
+        'margin-left': "#{@PLAYER_MARGINS.left}px"
+      }
       return
 
     update: (delta) ->
@@ -55,7 +68,7 @@ define ['controls'], (controls) ->
         @jumping = true
 
       # Drag and GRAVITY
-      @velocity.x *= 0.85
+      @velocity.x *= @DRAG
       @velocity.y += delta * @GRAVITY
 
       # Update position

@@ -41,7 +41,6 @@ define [], ->
     onOrientation: (e) ->
       degree = e.gamma
       if window.orientation
-        alert window.orientation
         direction = window.orientation / 90
         degree = direction * e.beta
       speed = degree / FULL_ANGLE

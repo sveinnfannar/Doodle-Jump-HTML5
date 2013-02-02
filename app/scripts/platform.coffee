@@ -8,8 +8,10 @@ define [], ->
       @el = $('<div class="platform">')
       @rect = rect
       @width = rect.right - rect.x
+      @height = rect.bottom - rect.y
       @el.css {
         width: @width
+        height: @height
       }
 
     @property 'x',
