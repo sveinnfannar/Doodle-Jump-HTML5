@@ -11,7 +11,6 @@ define [], ->
       @rect.right = @rect.x + PLATFORM_WIDTH
       @el.css {
         left: rect.x
-        top: rect.y
       }
 
     @property 'x',
@@ -19,8 +18,9 @@ define [], ->
 
     @property 'y',
       get: -> @rect.y
+      set: (y) -> @rect.y = y
 
     render: (camera) ->
-      @el.css $.fx.cssPrefix + 'transform', "translate(0px,#{-camera.position}px)"
+      @el.css $.fx.cssPrefix + 'transform', "translate(0px,#{@rect.y-camera.position}px)"
 
   return Platform

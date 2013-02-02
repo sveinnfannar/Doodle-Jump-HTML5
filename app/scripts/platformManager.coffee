@@ -10,7 +10,7 @@ define ["platform"], (Platform) ->
 
     addRandomPlatforms: ->
       # Create random platforms (this needs to be improved because of overlapping)
-      for y in [0..@screenHeight/10]
+      for y in [@screenHeight/10..0]
         @createPlatform Math.random()*(@screenWidth-90), Math.random()*10 + y*10
 
     render: (camera) ->
@@ -19,9 +19,10 @@ define ["platform"], (Platform) ->
     update: (camera) ->
       first = @platforms[0]
       while first.y - camera.position > @screenHeight
+        first.y -= @screenHeight
         @platforms.shift()
+        @platforms.push first
         first = @platforms[0]
-      console.log @platforms.length
 
     createPlatform: (x, y) ->
       rect =
