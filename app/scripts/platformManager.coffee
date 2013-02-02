@@ -6,6 +6,7 @@ define ["platform"], (Platform) ->
       @platforms = []
       @screenWidth = screenWidth
       @screenHeight = screenHeight
+      @previousCameraPosition = NaN
 
     reset: ->
       @addRandomPlatforms()
@@ -19,7 +20,9 @@ define ["platform"], (Platform) ->
         previousX = x
 
     render: (camera) ->
-      platform.render camera for platform in @platforms
+      if camera.position != @previousCameraPosition
+        @previousCameraPosition = camera.position
+        platform.render camera for platform in @platforms
 
     update: (camera) ->
       first = @platforms[0]
