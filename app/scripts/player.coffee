@@ -7,8 +7,8 @@ define ['controls'], (controls) ->
     GRAVITY: 3000
     PLATFORM_OFFSET: 5
     DRAG: 0.85
-    PLAYER_SIZE: {x: 66, y: 55}
-    PLAYER_MARGINS: {top: -70, left:-33}
+    PLAYER_SIZE: {x: 60, y: 58}
+    PLAYER_MARGINS: {top: -60, left:-28}
 
     constructor: (@gameScene) ->
       # Set up the elements
@@ -74,7 +74,7 @@ define ['controls'], (controls) ->
         @pos.x = 0
 
       # Jump
-      if not @jumping
+      if not @jumping and controls.keys['space']
         @velocity.y = -@JUMP_VELOCITY
         @jumping = true
 

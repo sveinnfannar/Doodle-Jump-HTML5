@@ -1,7 +1,7 @@
 define ["platform"], (Platform) ->
   class PlatformManager
     AVERAGE_PLATFORM_DISTANCE = 30
-    PLATFORM_SIZE = {x: 46, y: 41}
+    PLATFORM_SIZE = {x: 45, y: 11}
     HALF_PLATFORM_WIDTH = PLATFORM_SIZE.x / 2
     PLATFORM_X_VARIANCE = 20
     PLATFORM_Y_VARIANCE = 20
