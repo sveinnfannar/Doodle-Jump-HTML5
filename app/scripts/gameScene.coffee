@@ -25,7 +25,7 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
     update: (dt) ->
       @player.update dt
       @camera.update dt, @player
-      @platformManager.update @camera
+      @platformManager.update dt, @camera
       if @player.pos.y > @camera.position + @game.height
         @game.switchScene(new GameOverScene(@game, this))
 

@@ -1,4 +1,4 @@
-define ["platform"], (Platform) ->
+define ["platform", "movingPlatform"], (Platform, MovingPlatform) ->
   class PlatformManager
     AVERAGE_PLATFORM_DISTANCE = 30
     PLATFORM_SIZE = {x: 45, y: 11}
@@ -34,23 +34,33 @@ define ["platform"], (Platform) ->
     render: (camera) ->
       if camera.position != @previousCameraPosition
         @previousCameraPosition = camera.position
-        platform.render camera for platform in @platforms
+      platform.render camera for platform in @platforms
 
-    update: (camera) ->
+    update: (dt, camera) ->
+      platform.update(dt) for platform in @platforms
       first = @platforms[0]
       while first.y - camera.position > @screenHeight
         first.y -= @screenHeight + 20
         first.x = Math.random() * (@screenWidth + PLATFORM_SIZE.x) - PLATFORM_SIZE.x
         @platforms.shift()
+
+        if Math.random() > 0.5
+          console.log "making moving"
+          first.el.remove()
+          first = new MovingPlatform(@getPlatformRect(first.x, first.y), {min: first.x-50, max: first.x+50})
+          @gameScene.game.el.append first.el
         @platforms.push first
         first = @platforms[0]
 
     createPlatform: (x, y) ->
+      rect = @getPlatformRect(x, y)
+
+      platform = new Platform(rect)
+      @platforms.push platform
+    
+    getPlatformRect:(x, y) ->
       rect =
         x: x
         y: y
         right: x + PLATFORM_SIZE.x
         bottom: y + PLATFORM_SIZE.y
-
-      platform = new Platform(rect)
-      @platforms.push platform
