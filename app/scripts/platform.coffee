@@ -27,7 +27,7 @@ define [], ->
       get: -> @rect.y
       set: (y) ->
         @rect.y = y
-        @rect.bottom = y+@height
+        @rect.bottom = y + @height
 
     render: (camera) ->
       @el.css $.fx.cssPrefix + 'transform', "translate(#{@rect.x}px,#{@rect.y-camera.position}px)"

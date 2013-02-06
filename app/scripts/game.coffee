@@ -1,5 +1,5 @@
 #global define, $ 
-define ["player", "platform", "camera", "gameScene", "controls"], (Player, Platform, Camera, GameScene, controls) ->
+define ["camera", "gameScene", "controls"], (Camera, GameScene, controls) ->
   
   ###
   Main game class.
