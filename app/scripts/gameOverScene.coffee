@@ -1,5 +1,6 @@
 define [], ->
   class GameOverScene
+    SCALED = false
     END_TIME = 200
     SCROLL_SPEED = 400
 
@@ -11,12 +12,18 @@ define [], ->
         'left': "#{@game.width / 2 - width*3/2}px",
         'font-size': "#{width}px"
       }
-      END_TIME *= @game.ratio
-      SCROLL_SPEED *= @game.ratio
+
+      if not SCALED
+        END_TIME *= @game.ratio
+        SCROLL_SPEED *= @game.ratio
+        SCALED = true
       console.log "game over"
     
     buildScene: ->
       return [@gameover, @gameScene.player.el].concat (platform.el for platform in @gameScene.platformManager.platforms)
+
+    click: (event) ->
+      @game.startGame()
 
     onFrame: (dt) ->
       if @time < END_TIME

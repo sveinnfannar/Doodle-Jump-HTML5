@@ -22,6 +22,9 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
       @update dt
       @render()
 
+    click: (event) ->
+      console.log "hi from gamescene"
+
     update: (dt) ->
       @player.update dt
       @camera.update dt, @player
