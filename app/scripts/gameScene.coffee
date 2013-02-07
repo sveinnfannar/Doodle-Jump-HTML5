@@ -1,4 +1,4 @@
-define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera, PlatformManager, GameOverScene)->
+define ["player", "camera", "platformManager", "gameOverScene", "scoreBoard"], (Player, Camera, PlatformManager, GameOverScene, ScoreBoard)->
   class GameScene
     constructor: (@game)->
       @width = @game.width
@@ -6,10 +6,11 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
       @player = new Player(this)
       @camera = new Camera(@game.height/2, @game.height)
       @platformManager = new PlatformManager(this)
+      @scoreBoard = new ScoreBoard(@)
       @reset()
 
     buildScene: ->
-      return [@player.el].concat (platform.el for platform in @platformManager.platforms)
+      return [@player.el, @scoreBoard.el].concat (platform.el for platform in @platformManager.platforms)
 
     reset: ->
       @player.pos =
@@ -29,6 +30,7 @@ define ["player", "camera", "platformManager", "gameOverScene"], (Player, Camera
       @player.update dt
       @camera.update dt, @player
       @platformManager.update dt, @camera
+      @scoreBoard.update @camera
       if @player.pos.y > @camera.position + @game.height
         @game.switchScene(new GameOverScene(@game, this))
 
