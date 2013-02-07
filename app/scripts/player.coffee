@@ -95,11 +95,12 @@ define ['controls'], (controls) ->
 
     checkPlatforms: (oldY) ->
       for platform in @gameScene.platformManager.platforms
-        if @pos.y > platform.rect.y and platform.rect.y >= oldY
+        if platform.solid() and @pos.y > platform.rect.y and platform.rect.y >= oldY
           if @pos.x > platform.rect.left - PLATFORM_OFFSET and @pos.x < platform.rect.right + PLATFORM_OFFSET
             @pos.y = platform.rect.y
             @velocity.y = 0
             @jumping = false
+            platform.collision()
 
     render: (camera) ->
       # Update UI

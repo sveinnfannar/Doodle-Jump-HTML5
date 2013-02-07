@@ -31,6 +31,15 @@ define [], ->
     update: (dt) ->
       #do nothing
 
+    collision: () ->
+      #do nothing
+
+    dead: () ->
+      return false
+
+    solid: ->
+      return true
+
     render: (camera) ->
       @el.css $.fx.cssPrefix + 'transform', "translate(#{@rect.x}px,#{@rect.y-camera.position}px)"
 

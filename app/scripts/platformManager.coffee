@@ -1,4 +1,4 @@
-define ["platform", "movingPlatform"], (Platform, MovingPlatform) ->
+define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatform, FragilePlatform) ->
   class PlatformManager
     SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
@@ -41,18 +41,22 @@ define ["platform", "movingPlatform"], (Platform, MovingPlatform) ->
 
     update: (dt, camera) ->
       platform.update(dt) for platform in @platforms
-      first = @platforms[0]
-      while first.y - camera.position > @screenHeight
-        first.y -= @screenHeight + 20
-        first.x = Math.random() * (@screenWidth + PLATFORM_SIZE.x) - PLATFORM_SIZE.x
-        @platforms.shift()
+      remove = (platform for platform in @platforms when platform.y - camera.position > @screenHeight or platform.dead())
+      for platform in remove
+        platform.y -= @screenHeight + 20
+        platform.x = Math.random() * (@screenWidth + PLATFORM_SIZE.x) - PLATFORM_SIZE.x
+        @platforms.splice @platforms.indexOf(platform), 1
+        r = Math.random()
 
-        if Math.random() > 0.5
-          first.el.remove()
-          first = new MovingPlatform(@getPlatformRect(first.x, first.y), {min: first.x-50, max: first.x+50})
-          @gameScene.game.el.append first.el
-        @platforms.push first
-        first = @platforms[0]
+        platform.el.remove()
+        if r > 0.6
+          platform = new MovingPlatform @getPlatformRect(platform.x, platform.y), {min: platform.x-50, max: platform.x+50}
+        else if r > 0.3
+          platform = new FragilePlatform @getPlatformRect(platform.x, platform.y)
+        else
+          platform = new Platform @getPlatformRect(platform.x, platform.y)
+        @gameScene.game.el.append platform.el
+        @platforms.push platform
 
     createPlatform: (x, y) ->
       rect = @getPlatformRect(x, y)

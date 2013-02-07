@@ -36,6 +36,19 @@
   background: url('../images/green_platform.png') no-repeat;
   background-size: cover;
   z-index: 2;
+
+}
+
+.platform.fragile {
+  background: yellow;
+}
+
+.platform.fracturing {
+  background: red;
+}
+
+.platform.dying {
+  background: blue;
 }
 
 .gameover {
