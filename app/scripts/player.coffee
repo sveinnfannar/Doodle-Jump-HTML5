@@ -74,7 +74,7 @@ define ['controls'], (controls) ->
         @pos.x = 0
 
       # Jump
-      if not @jumping and controls.keys['space']
+      if not @jumping# and controls.keys['space']
         @velocity.y = -@JUMP_VELOCITY
         @jumping = true
 

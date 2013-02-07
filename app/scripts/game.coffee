@@ -15,7 +15,6 @@ define ["camera", "gameScene", "controls"], (Camera, GameScene, controls) ->
     @ratio = @height / @DESIGN_SIZE.y
     el.width(@DESIGN_SIZE.x * @ratio)
     @width = el.width()
-    console.log @width, @height, @DESIGN_SIZE, @ratio
 
     # Cache a bound onFrame, el.width() and el.height() since we need them each frame.
     @onFrame = @onFrame.bind(this)

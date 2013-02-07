@@ -44,4 +44,5 @@ MILESTONE 2
 
 BUGS
 ----
-* Collision detection is off after the camera moves
+* ~~Collision detection is off after the camera moves~~
+* Bad performance affecting game play

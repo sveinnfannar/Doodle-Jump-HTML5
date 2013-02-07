@@ -45,7 +45,6 @@ define ["platform", "movingPlatform"], (Platform, MovingPlatform) ->
         @platforms.shift()
 
         if Math.random() > 0.5
-          console.log "making moving"
           first.el.remove()
           first = new MovingPlatform(@getPlatformRect(first.x, first.y), {min: first.x-50, max: first.x+50})
           @gameScene.game.el.append first.el
@@ -54,7 +53,6 @@ define ["platform", "movingPlatform"], (Platform, MovingPlatform) ->
 
     createPlatform: (x, y) ->
       rect = @getPlatformRect(x, y)
-
       platform = new Platform(rect)
       @platforms.push platform
     
