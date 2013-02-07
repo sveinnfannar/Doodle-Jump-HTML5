@@ -1,5 +1,6 @@
 define ["platform", "movingPlatform"], (Platform, MovingPlatform) ->
   class PlatformManager
+    SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
     PLATFORM_SIZE = {x: 45, y: 11}
     HALF_PLATFORM_WIDTH = PLATFORM_SIZE.x / 2
@@ -12,12 +13,14 @@ define ["platform", "movingPlatform"], (Platform, MovingPlatform) ->
       @screenHeight = @gameScene.height
       @previousCameraPosition = NaN
       ratio = @gameScene.game.ratio
-      AVERAGE_PLATFORM_DISTANCE *= ratio
-      PLATFORM_SIZE.x *= ratio
-      PLATFORM_SIZE.y *= ratio
-      HALF_PLATFORM_WIDTH *= ratio
-      PLATFORM_X_VARIANCE *= ratio
-      PLATFORM_Y_VARIANCE *= ratio
+      if not SCALED
+        AVERAGE_PLATFORM_DISTANCE *= ratio
+        PLATFORM_SIZE.x *= ratio
+        PLATFORM_SIZE.y *= ratio
+        HALF_PLATFORM_WIDTH *= ratio
+        PLATFORM_X_VARIANCE *= ratio
+        PLATFORM_Y_VARIANCE *= ratio
+        SCALED = true
       return
 
     reset: ->

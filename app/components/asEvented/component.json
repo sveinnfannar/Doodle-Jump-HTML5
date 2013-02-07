@@ -1,0 +1,35 @@
+{
+  "name": "asEvented",
+  "version": "0.4.1",
+  "description": "Micro event emitter which provides the observer pattern to JavaScript object.",
+  "keywords": [
+    "evemts",
+    "emitter",
+    "bind",
+    "trigger",
+    "observer"
+  ],
+  "author": {
+    "name": "Michal Kuklis",
+    "email": "michal.kuklis@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Michal Kuklis",
+      "email": "michal.kuklis@gmail.com"
+    }
+  ],
+  "dependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mkuklis/asEvented.git"
+  },
+  "main": "asevented.js",
+  "gitHead": "27b727fe345e44e576227c4a4163f1d59d2ab644",
+  "readme": "#asEvented\n\n[![build status](https://secure.travis-ci.org/mkuklis/asEvented.png)](http://travis-ci.org/mkuklis/asEvented)\n\n## Description\n\nasEvented is a micro event emitter which provides the observer pattern to JavaScript object. \nIt works in the browser and server (node.js). The code follows a functional mixins pattern described by Angus Croll [a-fresh-look-at-javascript-mixins](http://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins).\n\n\n## Usage\n\nIn browser include single JavaScript file:\n\n    <script src=\"asevented.js\"></script>\n\nOn server install asEvented via npm first:\n\n    npm install asEvented\n\nand then include it in your project with:\n\n    var asEvented = require('asEvented');\n\n\n##Example Usage\nDefine the constructor which will make use of asEvented:\n    \n    function Model() {\n      this.id = 0;\n    }\n\nAdd (mixin) asEvented functionality to Model with:\n   \n    asEvented.call(Model.prototype);\n\nmodel has now access to **trigger**, **bind**/**on**, **one** and **unbind**/**off** functions\n\nAdd some functions to Model:\n\n    Model.prototype.setId = function (id) {\n      this.id = id;\n      this.trigger('change:id', id); // Model has now access to trigger\n    }\n\nCreate a new object and bind to `change:id` event:\n\n    var model = new Model();\n    model.bind('change:id', function (id) {\n      console.log('id changed to: ' +  id);\n    });\n\nSet a few model ids in order to trigger `change:id` event:\n    \n    model.setId(1);\n    model.setId(2);\n    model.setId(3);\n\nA single handler can be bound to multiple events by separating the events by spaces, though it will be ignorant of the triggering event:\n\n    model.bind('change:id change:pass', function() {\n      console.log('Event called.');\n    });\n\nAnd multiple events can be unbound in one call:\n\n    model.unbind('onload onready');\n\n\n##Contributors\n\n* [@mkuklis](http://github.com/mkuklis)\n* [@rk](http://github.com/rk)\n* [@scarsick](http://github.com/scarsick)\n* [@mpdaugherty](http://github.com/mpdaugherty)\n* [@zspencer](http://github.com/zspencer)\n* [@travishorn](http://github.com/travishorn)\n* [@KenPowers](http://github.com/KenPowers)\n* [@nazomikan](http://github.com/nazomikan)\n\n##License:\n<pre>\n(The MIT License)\n\nCopyright (c) 2011 Michal Kuklis\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n</pre>\n",
+  "readmeFilename": "README.md",
+  "_id": "asEvented@0.4.1"
+}

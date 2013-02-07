@@ -20,8 +20,15 @@ define ["camera", "gameScene", "controls"], (Camera, GameScene, controls) ->
     @onFrame = @onFrame.bind(this)
     @active = false
     @currentScene = null
+    controls.on('touch', @onTouch.bind(@))
     return
 
+  Game::onTouch = (e) ->
+    if @currentScene? and @currentScene.click? and @clickedElement(e, @el)
+      @currentScene.click(event)
+  
+  Game::clickedElement = (event, element) ->
+    return event.x < element.width()
 
   Game::switchScene = (scene) ->
     @active = false
@@ -51,7 +58,9 @@ define ["camera", "gameScene", "controls"], (Camera, GameScene, controls) ->
     # Restart the onFrame loop
     @lastFrame = +new Date() / 1000
     requestAnimFrame @onFrame
+    @startGame()
 
+  Game::startGame = ->
     @switchScene(new GameScene(this))
   
   ###

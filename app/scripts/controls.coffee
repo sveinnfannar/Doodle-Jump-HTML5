@@ -7,10 +7,12 @@ define [], ->
     }
 
     FULL_ANGLE = 20
+    asEvented.call(Controls.prototype)
 
     constructor: ->
       @keys = {}
       @tilt = 0
+      @clickObservers = []
       @inputVector =
         x: 0
         y: 0
@@ -18,6 +20,8 @@ define [], ->
         .on('keydown', @onKeyDown.bind(@))
         .on('keyup', @onKeyUp.bind(@))
         .on('deviceorientation', @onOrientation.bind(@))
+        .on('touchstart', @onTouch.bind(@))
+        .on('click', @onTouch.bind(@))
 
     onKeyDown: (e) ->
       if e.keyCode of @KEYS
@@ -37,6 +41,10 @@ define [], ->
 
       if @inputVector.x == 0
         @inputVector.x = @tilt
+
+    onTouch: (e) ->
+      console.log "touched"
+      this.trigger('touch', e)
 
     onOrientation: (e) ->
       degree = e.gamma
