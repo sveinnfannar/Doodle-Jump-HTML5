@@ -1,5 +1,5 @@
 #global define, $ 
-define ["camera", "gameScene", "controls"], (Camera, GameScene, controls) ->
+define ["camera", "gameScene", "controls", "menuScene"], (Camera, GameScene, controls, MenuScene) ->
   
   ###
   Main game class.
@@ -58,7 +58,7 @@ define ["camera", "gameScene", "controls"], (Camera, GameScene, controls) ->
     # Restart the onFrame loop
     @lastFrame = +new Date() / 1000
     requestAnimFrame @onFrame
-    @startGame()
+    @switchScene(new MenuScene(this))
 
   Game::startGame = ->
     @switchScene(new GameScene(this))
