@@ -17,7 +17,7 @@ define ["scene", "player", "camera", "entityManager", "gameOverScene", "scoreBoa
         urls: ['/sound/popcorn.ogg'],
         buffer: true,
         loop: true
-      })
+      }).play()
       @sounds = new Howl({
         urls: ['/sound/sprite_sound.wav'],
         sprite: {
@@ -46,6 +46,7 @@ define ["scene", "player", "camera", "entityManager", "gameOverScene", "scoreBoa
       @scoreBoard.update @camera
       if @player.pos.y > @camera.position + @game.height
         @game.switchScene(new GameOverScene(@game, this))
+        @music.pause()
 
       # TODO: Remove the whole render stuff
       @render()
