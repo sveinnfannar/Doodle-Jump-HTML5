@@ -1,5 +1,8 @@
 @import "compass/css3";
+@import "compass/css3/box-shadow";
 @import "_animation";
+
+@include font-face("Al-seana", font-files("../fonts/al-seana.ttf"));
 
 .container {
   bottom: 0;
@@ -36,7 +39,6 @@
   background: url('../images/green_platform.png') no-repeat;
   background-size: cover;
   z-index: 2;
-
 }
 
 .platform.fragile {
@@ -67,4 +69,13 @@
 
 .scoreboard {
   position: absolute;
+  width: 100%;
+  height: 30px;
+  background: rgba(167, 185, 205, 0.7);
+  border-bottom: 2px solid black;
+  @include box-shadow(rgba(black, 0.4) 0px 5px 10px);
+  font-family: "Al-seana";
+  font-size: 1.5em;
+  padding: 0px 10px;
+  z-index: 100;
 }

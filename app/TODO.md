@@ -35,6 +35,7 @@ MILESTONE 2
 * Shaders
 * Test for multiple platforms
 * Sound effects and music
+* Jetpack
 * ..
 
 ### TODO
