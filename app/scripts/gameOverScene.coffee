@@ -20,7 +20,7 @@ define [], ->
       console.log "game over"
     
     buildScene: ->
-      return [@gameover, @gameScene.player.el, @gameScene.scoreBoard.el].concat (platform.el for platform in @gameScene.platformManager.platforms)
+      return [@gameover, @gameScene.player.el, @gameScene.scoreBoard.el].concat (platform.el for platform in @gameScene.entityManager.platforms)
 
     click: (event) ->
       @game.startGame()

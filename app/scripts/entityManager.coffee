@@ -1,5 +1,5 @@
 define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatform, FragilePlatform) ->
-  class PlatformManager
+  class EntityManager
     SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
     PLATFORM_SIZE = {x: 45, y: 11}
@@ -69,3 +69,5 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
         y: y
         right: x + PLATFORM_SIZE.x
         bottom: y + PLATFORM_SIZE.y
+
+  return EntityManager

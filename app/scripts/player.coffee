@@ -94,7 +94,7 @@ define ['controls'], (controls) ->
       @checkPlatforms oldY
 
     checkPlatforms: (oldY) ->
-      for platform in @gameScene.platformManager.platforms
+      for platform in @gameScene.entityManager.platforms
         if platform.solid() and @pos.y > platform.rect.y and platform.rect.y >= oldY
           if @pos.x > platform.rect.left - PLATFORM_OFFSET and @pos.x < platform.rect.right + PLATFORM_OFFSET
             @pos.y = platform.rect.y
