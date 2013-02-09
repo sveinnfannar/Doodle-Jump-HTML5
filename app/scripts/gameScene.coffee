@@ -13,6 +13,20 @@ define ["scene", "player", "camera", "entityManager", "scoreBoard"],
       @scoreBoard = new ScoreBoard(@)
       @addChildElement(@scoreBoard.el)
       @reset()
+      @music = new Howl({
+        urls: ['/sound/popcorn.ogg'],
+        buffer: true,
+        loop: true
+      })
+      @sounds = new Howl({
+        urls: ['/sound/sprite_sound.wav'],
+        sprite: {
+          'buzzer': [0, 278],
+          'jump': [350, 1051],
+          'spring': [1100, 1000],
+          'coin': [2100, 500]
+        }
+      })
 
     reset: ->
       @player.pos =

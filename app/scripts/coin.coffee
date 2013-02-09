@@ -35,5 +35,6 @@ define ["item"], (Item) ->
     collision: ->
       super()
       @gameScene.scoreBoard.score += @value
+      @gameScene.sounds.play('coin')
 
   return Coin

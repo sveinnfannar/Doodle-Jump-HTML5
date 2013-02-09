@@ -4,6 +4,13 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
     AVERAGE_PLATFORM_DISTANCE = 30
     PLATFORM_X_VARIANCE = 20
     PLATFORM_Y_VARIANCE = 20
+    NEW_ENTITY_OFFSET = 20
+    NEW_OBSTACLE_CHANCE = 0.005
+    NEW_ITEM_CHANCE = 0.05
+    NEW_PLATFORM_DISTANCE = 5000
+    PLATFORM_TYPES = [Platform, MovingPlatform, FragilePlatform]
+    ITEM_TYPES = [Coin]
+    OBSTACLE_TYPES = [Obstacle]
 
     constructor: (@gameScene) ->
       @el = $('<div class="entityManager"></div>')
@@ -15,11 +22,15 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
       @screenWidth = @gameScene.width
       @screenHeight = @gameScene.height
       @previousCameraPosition = NaN
+      @itemTarget = null
+      @highestIndex = 1
+      @lastNewPlatformType = 0
       ratio = @gameScene.game.ratio
       if not SCALED
         AVERAGE_PLATFORM_DISTANCE *= ratio
         PLATFORM_X_VARIANCE *= ratio
         PLATFORM_Y_VARIANCE *= ratio
+        NEW_ENTITY_OFFSET *= ratio
         SCALED = true
 
       return
@@ -34,23 +45,67 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
         @createPlatform x,
                         Math.random()*PLATFORM_Y_VARIANCE + y*AVERAGE_PLATFORM_DISTANCE
         previousX = x
-        if Math.random() > 0.8
-          obstacle = new Obstacle @gameScene, Math.random() * 300, Math.random() * 600
-          @gameScene.game.el.append obstacle.el
-          @obstacles.push obstacle
-          @_addEntity obstacle
 
     render: (camera) ->
+      entity.render camera for entity in @entities
       if camera.position != @previousCameraPosition
         @previousCameraPosition = camera.position
-      entity.render camera for entity in @entities
+        if Math.random() < NEW_ITEM_CHANCE
+          @addRandomItem camera
+        if Math.random() < NEW_OBSTACLE_CHANCE
+          @addRandomObstacle camera
 
+    addRandomPlatform: (x, y, camera) ->
+      type = PLATFORM_TYPES[@_randomIndex @highestIndex]
+      newPlatform = new type @gameScene, x, y
+      @gameScene.game.el.append newPlatform.el
+
+      @platforms.push newPlatform
+      @entities.push newPlatform
+
+      #So we can place an item on top of the newest (topmost) platform if necessary
+      @itemTarget = newPlatform
+
+    addRandomObstacle: (camera) ->
+      type = OBSTACLE_TYPES[@_randomIndex OBSTACLE_TYPES.length]
+      newObstacle = new type @gameScene, 0, camera.position - NEW_ENTITY_OFFSET
+      @gameScene.game.el.append newObstacle.el
+
+      @obstacles.push newObstacle
+      @entities.push newObstacle
+
+    addRandomItem: (camera) ->
+      if not @itemTarget? or @itemTarget instanceof MovingPlatform
+        return
+      type = ITEM_TYPES[@_randomIndex ITEM_TYPES.length]
+      
+      newItem = new type @gameScene, 0, 0
+      @gameScene.game.el.append newItem.el
+      #Need to do this afgter element is added to the DOM to get the width and height
+      newItem.x = @itemTarget.x + @itemTarget.width/2 - newItem.width / 2
+      newItem.y = @itemTarget.y - @itemTarget.height * 2
+
+      @items.push newItem
+      @entities.push newItem
+      @itemTarget = null
+
+    _randomIndex: (max) ->
+      Math.floor(Math.random() * max)
+
+    _randomEntityXPosition: (width) ->
+      Math.random() * (@screenWidth + width) - width
+          
+          
     update: (dt, camera) ->
       entity.update(dt) for entity in @entities
-      @updatePlatforms(camera)
-      @updateEnemies(camera)
-      @updateItems(camera)
-      @updateObstacles(camera)
+      @updatePlatforms camera
+      @updateEnemies camera
+      @updateItems camera
+      @updateObstacles camera
+      if @highestIndex < PLATFORM_TYPES.length and @lastNewPlatformType - camera.position > NEW_PLATFORM_DISTANCE
+        #This allows us to add new platform types as the game progresses
+        @highestIndex += 1
+        @lastNewPlatformType = camera.position
 
     _shouldRemove: (entity, camera) ->
       return entity.y - camera.position > @screenHeight or entity.dead()
@@ -58,30 +113,13 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
     updatePlatforms: (camera) ->
       remove = (platform for platform in @platforms when @_shouldRemove platform, camera)
       for platform in remove
-        platform.y -= @screenHeight + 20
-        platform.x = Math.random() * (@screenWidth + platform.width) - platform.width 
+        platform.y -= @screenHeight + NEW_ENTITY_OFFSET
+        platform.x = @_randomEntityXPosition platform.width
         @platforms.splice @platforms.indexOf(platform), 1
         @entities.splice @entities.indexOf(platform), 1
-        r = Math.random()
 
-        if r > 0.8
-          newPlatform = new MovingPlatform @gameScene, platform.x, platform.y, {min: platform.x-50, max: platform.x+50}
-        else if r > 0.6
-          newPlatform = new FragilePlatform @gameScene, platform.x, platform.y
-          if Math.random() > 0.6
-            coin = new Coin @gameScene, platform.x + platform.width / 2, platform.y
-            @gameScene.game.el.append coin.el
-            #do this afterwards since height is calculated when added to the dom
-            coin.x -= coin.width/2
-            coin.y -= coin.height*2
-            @items.push coin
-            @_addEntity coin
-        else
-          newPlatform = new Platform @gameScene, platform.x, platform.y
+        @addRandomPlatform platform.x, platform.y, camera
         platform.el.remove()
-        @gameScene.game.el.append newPlatform.el
-        @platforms.push newPlatform
-        @_addEntity newPlatform
 
     updateEnemies: (camera) ->
       remove = (enemy for enemy in @enemies when @_shouldRemove enemy, camera)
@@ -98,6 +136,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
         @entities.splice @entities.indexOf(item), 1
 
         item.el.remove()
+
 
     updateObstacles: (camera) ->
       remove = (obstacle for obstacle in @obstacles when @_shouldRemove obstacle, camera)

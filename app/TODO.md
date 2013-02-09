@@ -22,7 +22,7 @@ MILESTONE 2
 * Menus
 * ~~Score~~ / high score list
 * Special platforms
-* Obstacles
+* ~~Obstacles~~
 * Moving ~~platforms~~/obstacles
 * ~~Coins~~
 * Items
