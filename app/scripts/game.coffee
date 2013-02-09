@@ -1,4 +1,6 @@
 #global define, $ 
+Function::property = (prop, desc) ->
+  Object.defineProperty @prototype, prop, desc
 define ["camera", "gameScene", "controls", "menuScene"], (Camera, GameScene, controls, MenuScene) ->
   class Game
     constructor: (el) ->
@@ -7,13 +9,12 @@ define ["camera", "gameScene", "controls", "menuScene"], (Camera, GameScene, con
       @width = el.width()
       @height = window.innerHeight #el.height()
       @DESIGN_SIZE = {x: 550, y: 600}
-
       @ratio = @height / @DESIGN_SIZE.y
-      el.width(@DESIGN_SIZE.x * @ratio)
-      @width = el.width()
       @onFrame = @onFrame.bind(this)
       @active = false
       @currentScene = null
+      $('body').css('font-size', @ratio * 10 + 'px')
+      @width = el.width()
       return
 
     switchScene: (scene) ->

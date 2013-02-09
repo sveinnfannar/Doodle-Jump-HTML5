@@ -8,6 +8,10 @@
   src: url('../fonts/al-seana.ttf');
 }
 
+body {
+  font-size: 10px;
+}
+
 .container {
   bottom: 0;
   left: 0;
@@ -19,18 +23,24 @@
 }
 
 .game {
+  background: url('../images/background.png') repeat;
+  background-size: 320px 320px;
+  height: 60em;
+  width: 55em;
   position: relative;
   min-height: 100%;
   overflow: hidden;
   z-index: -1;
-  background: url('../images/background.png') repeat;
-  background-size: 320px 320px;
 }
 
 .player {
   position: absolute;
   left: 0;
   top: 0;
+  width: 6em;
+  height: 5.5em;
+  margin-top: -6em;
+  margin-left: -2.8em;
   background: url('../images/doodle_right.png') no-repeat;
   background-size: cover;
   z-index: 3;
@@ -41,6 +51,8 @@
   position: absolute;
   background: url('../images/green_platform.png') no-repeat;
   background-size: cover;
+  width: 4.5em;
+  height: 1.1em;
   z-index: 2;
 }
 
@@ -72,6 +84,8 @@
 .item.coin {
   background: url('../images/ball.png') no-repeat;
   background-size: cover;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .scoreboard {

@@ -56,6 +56,8 @@ define [], ->
         speed = 1
       else if speed < -1
         speed = -1
+      else if Math.abs(speed) < 0.3
+        speed = 0
       @tilt = speed
 
   return new Controls

@@ -3,12 +3,16 @@ define ["platform"], (Platform) ->
     Object.defineProperty @prototype, prop, desc
 
   class MovingPlatform extends Platform
+    SCALED = false
     SPEED = 20
 
-    constructor: (gameScene, rect, xBounds) ->
-      super gameScene, rect
+    constructor: (gameScene, x, y, xBounds) ->
+      super gameScene, x, y
       @minX = xBounds.min
       @maxX = xBounds.max
+      if not SCALED
+        SPEED *= gameScene.game.ratio
+        SCALED = true
       @velocity = SPEED
 
     update: (dt) ->

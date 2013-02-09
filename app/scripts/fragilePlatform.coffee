@@ -11,8 +11,8 @@ define ["platform"], (Platform) ->
     DYING = 2
     DEAD = 3
 
-    constructor: (gameScene, rect) ->
-      super gameScene, rect
+    constructor: (gameScene, x, y) ->
+      super gameScene, x, y
       @state = NORMAL
       @el.addClass "fragile"
       @fracture_time = -1

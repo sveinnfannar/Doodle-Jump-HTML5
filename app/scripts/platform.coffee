@@ -6,6 +6,6 @@ define ["entity"], (Entity) ->
 
     collision: ->
       super()
-      @gameScene.player.land @rect.y
+      @gameScene.player.land @y
 
   return Platform

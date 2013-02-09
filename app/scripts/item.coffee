@@ -1,7 +1,7 @@
 define ["entity"], (Entity) ->
   class Item extends Entity
-    constructor: (gameScene, rect) ->
-      super(gameScene, rect)
+    constructor: (gameScene, x, y) ->
+      super gameScene, x, y
       @collected = false
 
     makeElement: ->
