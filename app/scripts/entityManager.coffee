@@ -69,7 +69,6 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
           platform = new FragilePlatform @gameScene, @getRect(platform.x, platform.y)
           if Math.random() > 0.6
             r = @getRect(platform.x, platform.y - 20)
-            r.right -= 20
             r.x += 20
             coin = new Coin @gameScene, r
             @gameScene.game.el.append coin.el

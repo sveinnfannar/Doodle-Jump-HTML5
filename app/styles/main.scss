@@ -64,7 +64,11 @@
 
 .item {
   position: absolute;
-  background-color: red;
+}
+
+.item.coin {
+  background: url('../images/ball.png') no-repeat;
+  background-size: cover;
 }
 
 .scoreboard {
