@@ -5,14 +5,16 @@ define ["platform"], (Platform) ->
   class MovingPlatform extends Platform
     SCALED = false
     SPEED = 20
+    MAX_DISTANCE = 50
 
     constructor: (gameScene, x, y, xBounds) ->
       super gameScene, x, y
-      @minX = xBounds.min
-      @maxX = xBounds.max
       if not SCALED
         SPEED *= gameScene.game.ratio
+        MAX_DISTANCE *= gameScene.game.ratio
         SCALED = true
+      @minX = x - MAX_DISTANCE
+      @maxX = x + MAX_DISTANCE
       @velocity = SPEED
 
     update: (dt) ->
