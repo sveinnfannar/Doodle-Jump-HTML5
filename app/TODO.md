@@ -33,6 +33,8 @@ MILESTONE 2
 * Particle effects
 * Better game over
 * Shaders
+* Test for multiple platforms
+* Sound effects and music
 * ..
 
 ### TODO
