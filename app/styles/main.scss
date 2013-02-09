@@ -2,7 +2,11 @@
 @import "compass/css3/box-shadow";
 @import "_animation";
 
-@include font-face("Al-seana", font-files("../fonts/al-seana.ttf"));
+@font-face
+{
+  font-family: Al-seana;
+  src: url('../fonts/al-seana.ttf');
+}
 
 body {
   font-size: 10px;
@@ -24,7 +28,6 @@ body {
   height: 60em;
   width: 55em;
   position: relative;
-  border: 1px solid;
   min-height: 100%;
   overflow: hidden;
   z-index: -1;
@@ -41,7 +44,6 @@ body {
   background: url('../images/doodle_right.png') no-repeat;
   background-size: cover;
   z-index: 3;
-  border: 1px solid black;
 }
 
 .platform {
@@ -92,8 +94,30 @@ body {
   background: rgba(167, 185, 205, 0.7);
   border-bottom: 2px solid black;
   @include box-shadow(rgba(black, 0.4) 0px 5px 10px);
-  font-family: "Al-seana";
+  font-family: Al-seana;
   font-size: 1.5em;
   padding: 0px 10px;
-  z-index: 100;
+  z-index: 100; 
+}
+
+.gameScene {
+  
+}
+
+.menuScene {
+  position: absolute;
+  background-size: 550px 600px;
+  background: red;
+  background: url('../images/menu-background.png') no-repeat;
+  background-size: cover;
+
+  .button {
+    background: url('../images/button.png');
+    width: 1em;
+    height: 1em;
+
+    .pressed {
+      background: url('../images/button-pressed.png');
+    }
+  }
 }

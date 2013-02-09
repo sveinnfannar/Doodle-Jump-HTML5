@@ -10,17 +10,7 @@ define ['controls'], (controls) ->
 
     constructor: (@gameScene) ->
       # Set up the elements
-      @el = $('<div class="player">
-        <div class="front_right_leg"></div>
-        <div class="front_left_leg"></div>
-        <div class="back_right_leg"></div>
-        <div class="back_left_leg"></div>
-        </div>')
-      @legEls =
-        frontRight: $('.front_right_leg')
-        backRight: $('.back_right_leg')
-        frontLeft: $('.front_left_leg')
-        backLeft: $('.back_left_leg')
+      @el = $('<div class="player"></div>')
 
       @flip = 1
       @pos =
@@ -97,7 +87,6 @@ define ['controls'], (controls) ->
         entity.checkPlayerCollision @, oldPos
 
     land: (y) ->
-      console.log "landing"
       @pos.y = y
       @velocity.y = 0
       @jumping = false

@@ -1,22 +1,28 @@
-define [], ->
+define ["controls"], (controls) ->
   class MenuScene
+    SIZE = {width:396, height:600}
 
     constructor: (@game) ->
-      @newgame = $('<span class="newGame">New Game</span>')
-      width = @game.width / 6
-      @newgame.css {
-        'left': "#{@game.width / 2 - width*3/2}px",
-        'top': "100px",
-        'font-size': "#{width}px"
-      }
-    
-    buildScene: ->
-      return [@newgame]
+      @el = $('<div class="menuScene">
+                <div class="button">Play</div>
+                <div class="button">About</div>
+                </div>')
+      ratio = game.ratio
+      console.log ratio
+      @el.width ratio*SIZE.width
+      @el.height ratio*SIZE.height
+      controls.on('touch', @onTouch.bind(@))
 
-    click: (event) ->
+    buildScene: ->
+      return [@el]
+
+    onTouch: (event) ->
       @game.startGame()
 
     onFrame: (dt) ->
       #nothing
+    
+    cleanup: ->
+      controls.off('touch')
 
   return MenuScene

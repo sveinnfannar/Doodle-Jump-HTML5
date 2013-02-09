@@ -40,4 +40,7 @@ define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Pl
       # Move background
       @game.el.css "background-position", "0px #{-@camera.position*0.4}px"
 
+    cleanup: ->
+      console.log "GameScene.cleanup()"
+
   return GameScene
