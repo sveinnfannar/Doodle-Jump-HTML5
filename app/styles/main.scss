@@ -60,6 +60,15 @@ body {
   z-index: 2;
 }
 
+.obstacle {
+  position: absolute;
+  background: url('../images/red_platform.png') no-repeat;
+  background-size: cover;
+  width: 4.5em;
+  height: 1.1em;
+  z-index: 2;
+}
+
 .platform.fragile {
   background: yellow;
 }

@@ -10,7 +10,7 @@ define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Pl
       @reset()
 
     buildScene: ->
-      return [@player.el, @scoreBoard.el].concat (platform.el for platform in @entityManager.platforms)
+      return [@player.el, @scoreBoard.el].concat (entity.el for entity in @entityManager.entities)
 
     reset: ->
       @player.pos =

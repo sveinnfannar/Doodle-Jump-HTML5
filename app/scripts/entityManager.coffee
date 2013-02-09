@@ -1,4 +1,4 @@
-define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, MovingPlatform, FragilePlatform, Coin) ->
+define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (Platform, MovingPlatform, FragilePlatform, Coin, Obstacle) ->
   class EntityManager
     SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
@@ -33,6 +33,11 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
         @createPlatform x,
                         Math.random()*PLATFORM_Y_VARIANCE + y*AVERAGE_PLATFORM_DISTANCE
         previousX = x
+        if Math.random() > 0.8
+          obstacle = new Obstacle @gameScene, Math.random() * 300, Math.random() * 600
+          @gameScene.game.el.append obstacle.el
+          @obstacles.push obstacle
+          @entities.push obstacle
 
     render: (camera) ->
       if camera.position != @previousCameraPosition
@@ -58,9 +63,9 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
         @entities.splice @entities.indexOf(platform), 1
         r = Math.random()
 
-        if r > 0.6
+        if r > 0.8
           newPlatform = new MovingPlatform @gameScene, platform.x, platform.y, {min: platform.x-50, max: platform.x+50}
-        else if r > 0.3
+        else if r > 0.6
           newPlatform = new FragilePlatform @gameScene, platform.x, platform.y
           if Math.random() > 0.6
             coin = new Coin @gameScene, platform.x + platform.width / 2, platform.y
@@ -100,6 +105,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
         @entities.splice @entities.indexOf(obstacle), 1
 
         obstacle.el.remove()
+
 
     createPlatform: (x, y) ->
       platform = new Platform @gameScene, x, y
