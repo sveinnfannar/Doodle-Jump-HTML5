@@ -4,9 +4,8 @@ define ["scene"], (Scene) ->
     END_TIME = 200
     SCROLL_SPEED = 400
 
-    constructor: (@game, @gameScene) ->
+    constructor: (@game, @score) ->
       super @game, "gameOverScene"
-      @time = 0
 
       if not SCALED
         END_TIME *= @game.ratio

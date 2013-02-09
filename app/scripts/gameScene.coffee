@@ -1,5 +1,5 @@
-define ["scene", "player", "camera", "entityManager", "gameOverScene", "scoreBoard"],
-(Scene, Player, Camera, EntityManager, GameOverScene, ScoreBoard)->
+define ["scene", "player", "camera", "entityManager", "scoreBoard"],
+(Scene, Player, Camera, EntityManager, ScoreBoard)->
   class GameScene extends Scene
     constructor: (@game)->
       super @game, "gameScene"
@@ -31,7 +31,7 @@ define ["scene", "player", "camera", "entityManager", "gameOverScene", "scoreBoa
       @entityManager.update dt, @camera
       @scoreBoard.update @camera
       if @player.pos.y > @camera.position + @game.height
-        @game.switchScene(new GameOverScene(@game, this))
+        @game.gameOver(@scoreBoard.score)
 
       # TODO: Remove the whole render stuff
       @render()
