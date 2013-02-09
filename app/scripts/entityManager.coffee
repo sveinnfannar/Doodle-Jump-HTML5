@@ -6,6 +6,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
     PLATFORM_Y_VARIANCE = 20
 
     constructor: (@gameScene) ->
+      @el = $('<div class="entityManager"></div>')
       @entities = []
       @platforms = []
       @items = []
@@ -37,7 +38,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
           obstacle = new Obstacle @gameScene, Math.random() * 300, Math.random() * 600
           @gameScene.game.el.append obstacle.el
           @obstacles.push obstacle
-          @entities.push obstacle
+          @_addEntity obstacle
 
     render: (camera) ->
       if camera.position != @previousCameraPosition
@@ -74,13 +75,13 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
             coin.x -= coin.width/2
             coin.y -= coin.height*2
             @items.push coin
-            @entities.push coin
+            @_addEntity coin
         else
           newPlatform = new Platform @gameScene, platform.x, platform.y
         platform.el.remove()
         @gameScene.game.el.append newPlatform.el
         @platforms.push newPlatform
-        @entities.push newPlatform
+        @_addEntity newPlatform
 
     updateEnemies: (camera) ->
       remove = (enemy for enemy in @enemies when @_shouldRemove enemy, camera)
@@ -106,10 +107,13 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
 
         obstacle.el.remove()
 
-
     createPlatform: (x, y) ->
       platform = new Platform @gameScene, x, y
       @platforms.push platform
-      @entities.push platform
+      @_addEntity platform
+
+    _addEntity: (entity) ->
+      @entities.push entity
+      @el.append entity.el
 
   return EntityManager

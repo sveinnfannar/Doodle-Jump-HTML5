@@ -6,7 +6,7 @@ define [], ->
       @el = @makeElement()
 
     @makeElement: ->
-      alert "makeElement called in superclass"
+      console.log "makeElement called in superclass"
 
     @property 'width',
       get: ->
