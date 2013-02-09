@@ -10,7 +10,7 @@ define ["camera", "gameScene", "controls", "menuScene"], (Camera, GameScene, con
       @height = window.innerHeight #el.height()
       @DESIGN_SIZE = {x: 550, y: 600}
       @ratio = @height / @DESIGN_SIZE.y
-      @onFrame = @onFrame.bind(this)
+      @update = @update.bind(this)
       @active = false
       @currentScene = null
       $('body').css('font-size', @ratio * 10 + 'px')
@@ -20,26 +20,27 @@ define ["camera", "gameScene", "controls", "menuScene"], (Camera, GameScene, con
     switchScene: (scene) ->
       @active = false
       @el.empty()
-      (@el.append obj for obj in scene.buildScene())
+      #(@el.append obj for obj in scene.buildScene())
+      @el.append(scene.el)
       if @currentScene?
         @currentScene.cleanup()
       @currentScene = scene
       @active = true
     
-    onFrame: ->
+    update: ->
       if @active
         now = +new Date() / 1000
         delta = now - @lastFrame
-        controls.onFrame delta
+        controls.update delta
         @lastFrame = now
-        @currentScene.onFrame delta
+        @currentScene.update delta
       
       # Request next frame.
-      requestAnimFrame @onFrame.bind(@)
+      requestAnimFrame @update.bind(@)
     
-    scheduleOnFrame: ->
+    scheduleUpdate: ->
       @lastFrame = +new Date() / 1000
-      requestAnimFrame @onFrame
+      requestAnimFrame @update
 
     startMenu: ->
       @switchScene(new MenuScene(this))

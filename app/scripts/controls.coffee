@@ -33,7 +33,7 @@ define [], ->
         @keys[@KEYS[e.keyCode]] = false
       this.trigger('keyup', e)
 
-    onFrame: (dt) ->
+    update: (dt) ->
       if @keys.right
         @inputVector.x = 1
       else if @keys.left

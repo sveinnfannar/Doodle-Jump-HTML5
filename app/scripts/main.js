@@ -8,6 +8,6 @@ require.config({
  
 require(['game'], function(Game) {
   var game = new Game($('.game'));
-  game.scheduleOnFrame();
+  game.scheduleUpdate();
   game.startMenu();
 });

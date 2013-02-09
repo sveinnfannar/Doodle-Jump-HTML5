@@ -1,12 +1,17 @@
-define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Player, Camera, EntityManager, GameOverScene, ScoreBoard)->
-  class GameScene
+define ["scene", "player", "camera", "entityManager", "gameOverScene", "scoreBoard"],
+(Scene, Player, Camera, EntityManager, GameOverScene, ScoreBoard)->
+  class GameScene extends Scene
     constructor: (@game)->
+      super @game, "gameScene"
       @width = @game.width
       @height = @game.height
       @player = new Player(this)
+      @addChildElement(@player.el)
       @camera = new Camera(@game.height/2, @game.height)
       @entityManager = new EntityManager(this)
+      @addChildElement(@entityManager.el)
       @scoreBoard = new ScoreBoard(@)
+      @addChildElement(@scoreBoard.el)
       @reset()
       @music = new Howl({
         urls: ['/sound/popcorn.ogg'],
@@ -22,9 +27,6 @@ define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Pl
         }
       })
 
-    buildScene: ->
-      return [@player.el, @scoreBoard.el].concat (entity.el for entity in @entityManager.entities)
-
     reset: ->
       @player.pos =
         x: @width/2
@@ -32,20 +34,20 @@ define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Pl
       @entityManager.createPlatform(@width/2, @height - 30)
       @entityManager.reset()
 
-    onFrame: (dt) ->
-      @update dt
-      @render()
-
     click: (event) ->
       console.log "hi from gamescene"
 
     update: (dt) ->
+      super dt
       @player.update dt
       @camera.update dt, @player
       @entityManager.update dt, @camera
       @scoreBoard.update @camera
       if @player.pos.y > @camera.position + @game.height
         @game.switchScene(new GameOverScene(@game, this))
+
+      # TODO: Remove the whole render stuff
+      @render()
 
     render: ->
       @player.render @camera
@@ -54,6 +56,7 @@ define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Pl
       @game.el.css "background-position", "0px #{-@camera.position*0.4}px"
 
     cleanup: ->
+      super()
       console.log "GameScene.cleanup()"
 
   return GameScene

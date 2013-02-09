@@ -81,15 +81,6 @@ body {
   background: blue;
 }
 
-.gameover {
-  position: absolute;
-  font: bold;
-  color: red;
-  left: 18.6em;
-  z-index: 999;
-  background-color: rgba(0, 180, 180, 0.9);
-}
-
 .item {
   position: absolute;
 }
@@ -118,11 +109,24 @@ body {
   
 }
 
+.gameOverScene {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font: bold;
+  color: red;
+  z-index: 999;
+  background-color: red;
+}
+
+
 .menuScene {
   position: absolute;
   background-size: 550px 600px;
   background: url('../images/menu-background.png') no-repeat;
   background-size: cover;
+  height: 60em;
+  width: 39.6em;
 
   .button {
     position: absolute;

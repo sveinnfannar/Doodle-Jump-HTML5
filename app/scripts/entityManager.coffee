@@ -13,6 +13,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
     OBSTACLE_TYPES = [Obstacle]
 
     constructor: (@gameScene) ->
+      @el = $('<div class="entityManager"></div>')
       @entities = []
       @platforms = []
       @items = []
@@ -69,8 +70,6 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
       type = OBSTACLE_TYPES[@_randomIndex OBSTACLE_TYPES.length]
       newObstacle = new type @gameScene, 0, camera.position - NEW_ENTITY_OFFSET
       @gameScene.game.el.append newObstacle.el
-      #Need to do this after element is added to the DOM to get width
-      newObstacle.x = @_randomEntityXPosition newObstacle.width
 
       @obstacles.push newObstacle
       @entities.push newObstacle
@@ -147,11 +146,13 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
 
         obstacle.el.remove()
 
-
-
     createPlatform: (x, y) ->
       platform = new Platform @gameScene, x, y
       @platforms.push platform
-      @entities.push platform
+      @_addEntity platform
+
+    _addEntity: (entity) ->
+      @entities.push entity
+      @el.append entity.el
 
   return EntityManager
