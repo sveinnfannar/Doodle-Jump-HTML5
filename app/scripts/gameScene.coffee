@@ -1,23 +1,23 @@
-define ["player", "camera", "platformManager", "gameOverScene", "scoreBoard"], (Player, Camera, PlatformManager, GameOverScene, ScoreBoard)->
+define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Player, Camera, EntityManager, GameOverScene, ScoreBoard)->
   class GameScene
     constructor: (@game)->
       @width = @game.width
       @height = @game.height
       @player = new Player(this)
       @camera = new Camera(@game.height/2, @game.height)
-      @platformManager = new PlatformManager(this)
+      @entityManager = new EntityManager(this)
       @scoreBoard = new ScoreBoard(@)
       @reset()
 
     buildScene: ->
-      return [@player.el, @scoreBoard.el].concat (platform.el for platform in @platformManager.platforms)
+      return [@player.el, @scoreBoard.el].concat (platform.el for platform in @entityManager.platforms)
 
     reset: ->
       @player.pos =
         x: @width/2
         y: (5.5 * @height) / 6
-      @platformManager.createPlatform(@width/2, @height - 30)
-      @platformManager.reset()
+      @entityManager.createPlatform(@width/2, @height - 30)
+      @entityManager.reset()
 
     onFrame: (dt) ->
       @update dt
@@ -29,14 +29,14 @@ define ["player", "camera", "platformManager", "gameOverScene", "scoreBoard"], (
     update: (dt) ->
       @player.update dt
       @camera.update dt, @player
-      @platformManager.update dt, @camera
+      @entityManager.update dt, @camera
       @scoreBoard.update @camera
       if @player.pos.y > @camera.position + @game.height
         @game.switchScene(new GameOverScene(@game, this))
 
     render: ->
       @player.render @camera
-      @platformManager.render @camera
+      @entityManager.render @camera
       # Move background
       @game.el.css "background-position", "0px #{-@camera.position*0.4}px"
 

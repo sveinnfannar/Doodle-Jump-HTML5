@@ -1,5 +1,5 @@
 define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatform, FragilePlatform) ->
-  class PlatformManager
+  class EntityManager
     SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
     PLATFORM_SIZE = {x: 45, y: 11}
@@ -8,7 +8,11 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
     PLATFORM_Y_VARIANCE = 20
 
     constructor: (@gameScene) ->
+      @entities = []
       @platforms = []
+      @items = []
+      @enemies = []
+      @obstacles = []
       @screenWidth = @gameScene.width
       @screenHeight = @gameScene.height
       @previousCameraPosition = NaN
@@ -40,12 +44,22 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
       platform.render camera for platform in @platforms
 
     update: (dt, camera) ->
-      platform.update(dt) for platform in @platforms
-      remove = (platform for platform in @platforms when platform.y - camera.position > @screenHeight or platform.dead())
+      entity.update(dt) for entity in @entities
+      @updatePlatforms(camera)
+      @updateEnemies(camera)
+      @updateItems(camera)
+      @updateObstacles(camera)
+
+    _shouldRemove: (entity, camera) ->
+      return entity.y - camera.position > @screenHeight or entity.dead()
+
+    updatePlatforms: (camera) ->
+      remove = (platform for platform in @platforms when @_shouldRemove platform, camera)
       for platform in remove
         platform.y -= @screenHeight + 20
         platform.x = Math.random() * (@screenWidth + PLATFORM_SIZE.x) - PLATFORM_SIZE.x
         @platforms.splice @platforms.indexOf(platform), 1
+        @entities.splice @entities.indexOf(platform), 1
         r = Math.random()
 
         platform.el.remove()
@@ -57,11 +71,37 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
           platform = new Platform @getPlatformRect(platform.x, platform.y)
         @gameScene.game.el.append platform.el
         @platforms.push platform
+        @entities.push platform
+
+    updateEnemies: (camera) ->
+      remove = (enemy for enemy in @enemies when @_shouldRemove enemy, camera)
+      for enemy in remove
+        @enemies.splice @enemies.indexOf(enemy), 1
+        @entities.splice @entities.indexOf(enemy), 1
+
+        enemy.el.remove()
+
+    updateItems: (camera) ->
+      remove = (item for item in @items when @_shouldRemove item, camera)
+      for item in remove
+        @items.splice @items.indexOf(item), 1
+        @entities.splice @entities.indexOf(item), 1
+
+        item.el.remove()
+
+    updateObstacles: (camera) ->
+      remove = (obstacle for obstacle in @obstacles when @_shouldRemove obstacle, camera)
+      for obstacle in remove
+        @obstacles.splice @obstacles.indexOf(obstacle), 1
+        @entities.splice @entities.indexOf(obstacle), 1
+
+        obstacle.el.remove()
 
     createPlatform: (x, y) ->
       rect = @getPlatformRect(x, y)
       platform = new Platform(rect)
       @platforms.push platform
+      @entities.push platform
     
     getPlatformRect:(x, y) ->
       rect =
@@ -69,3 +109,5 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
         y: y
         right: x + PLATFORM_SIZE.x
         bottom: y + PLATFORM_SIZE.y
+
+  return EntityManager

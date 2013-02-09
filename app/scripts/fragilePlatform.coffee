@@ -36,9 +36,6 @@ define ["platform"], (Platform) ->
           @y += DIE_SPEED * dt
 
     dead: ->
-      console.log(@)
-      if @state == DEAD
-        console.log "returning", @state == DEAD, @state
       return @state == DEAD
 
     solid: ->
