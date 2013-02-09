@@ -36,6 +36,7 @@ MILESTONE 2
 * Test for multiple platforms
 * Sound effects and music
 * Jetpack
+* Space background when player reaches some height
 * ..
 
 ### TODO
