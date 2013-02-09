@@ -13,17 +13,7 @@ define ['controls'], (controls) ->
 
     constructor: (@gameScene) ->
       # Set up the elements
-      @el = $('<div class="player">
-        <div class="front_right_leg"></div>
-        <div class="front_left_leg"></div>
-        <div class="back_right_leg"></div>
-        <div class="back_left_leg"></div>
-        </div>')
-      @legEls =
-        frontRight: $('.front_right_leg')
-        backRight: $('.back_right_leg')
-        frontLeft: $('.front_left_leg')
-        backLeft: $('.back_left_leg')
+      @el = $('<div class="player"></div>')
 
       @flip = 1
       @pos =
@@ -47,8 +37,8 @@ define ['controls'], (controls) ->
         PLAYER_MARGINS.top *= ratio
         PLAYER_MARGINS.left *= ratio
         SCALED = true
-      @el.width(PLAYER_SIZE.x)
-      @el.height(PLAYER_SIZE.y)
+      @el.width PLAYER_SIZE.x
+      @el.height PLAYER_SIZE.y
       @el.css {
         'margin-top': "#{PLAYER_MARGINS.top}px",
         'margin-left': "#{PLAYER_MARGINS.left}px"
