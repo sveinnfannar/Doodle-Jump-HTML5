@@ -17,13 +17,14 @@ define ["scene", "player", "camera", "entityManager", "gameOverScene", "scoreBoa
         urls: ['/sound/popcorn.ogg'],
         buffer: true,
         loop: true
-      }).play()
+      })
       @sounds = new Howl({
         urls: ['/sound/sprite_sound.wav'],
         sprite: {
           'buzzer': [0, 278],
-          'jump': [300, 1131],
-          'spring': [1300, 2240]
+          'jump': [350, 1051],
+          'spring': [1100, 1000],
+          'coin': [2100, 500]
         }
       })
 
