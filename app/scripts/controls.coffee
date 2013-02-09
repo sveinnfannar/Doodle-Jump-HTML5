@@ -26,10 +26,12 @@ define [], ->
     onKeyDown: (e) ->
       if e.keyCode of @KEYS
         @keys[@KEYS[e.keyCode]] = true
+      this.trigger('keydown', e)
 
     onKeyUp: (e) ->
       if e.keyCode of @KEYS
         @keys[@KEYS[e.keyCode]] = false
+      this.trigger('keyup', e)
 
     onFrame: (dt) ->
       if @keys.right

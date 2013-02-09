@@ -121,17 +121,53 @@ body {
 .menuScene {
   position: absolute;
   background-size: 550px 600px;
-  background: red;
   background: url('../images/menu-background.png') no-repeat;
   background-size: cover;
 
   .button {
+    position: absolute;
     background: url('../images/button.png');
-    width: 1em;
-    height: 1em;
+    background-size: cover;
+    font-family: Al-seana;
+    font-size: 4em;
+    text-align: center;
+    width: 3em;
+    height: 1.08em;
 
     .pressed {
       background: url('../images/button-pressed.png');
     }
+  }
+
+  .button.play {
+    top: 5em;
+    left: 2.3em;
+  }
+
+  .button.about {
+    top: 6.4em;
+    left: 2.3em;
+  }
+
+  .doodle {
+    position: absolute;
+    left: 7em;
+    top: 47em;
+    width: 6em;
+    height: 5.8em;
+    margin-top: -6em;
+    margin-left: -2.8em;
+    background: url('../images/doodle_right.png') no-repeat;
+    background-size: cover;
+    @include animation(menu-doodle-jumping 0.3s ease-in infinite alternate)
+  }
+}
+
+@include keyframes(menu-doodle-jumping) {
+  from {
+    top: 40em;
+  }
+  to {
+    top: 47em;
   }
 }
