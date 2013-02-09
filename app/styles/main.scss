@@ -31,7 +31,7 @@ body {
   background: url('../images/background.png') repeat;
   background-size: 320px 320px;
   height: 60em;
-  width: 55em;
+  width: 45em;
   position: relative;
   min-height: 100%;
   overflow: hidden;
@@ -155,15 +155,15 @@ body {
 
   .doodle {
     position: absolute;
-    left: 7em;
-    top: 47em;
+    left: 8em;
+    top: 50.2em;
     width: 6em;
     height: 5.8em;
     margin-top: -6em;
     margin-left: -2.8em;
     background: url('../images/doodle_right.png') no-repeat;
     background-size: cover;
-    @include animation(menu-doodle-jumping 0.3s ease-in infinite alternate)
+    @include animation(menu-doodle-jumping 0.3s ease-in infinite alternate);
   }
 }
 
@@ -172,6 +172,6 @@ body {
     top: 40em;
   }
   to {
-    top: 47em;
+    top: 50.2em;
   }
 }

@@ -1,18 +1,11 @@
-define ["scene"], (Scene) ->
+define ["scene", "scoreBoard"], (Scene, ScoreBoard) ->
   class GameOverScene extends Scene
-    SCALED = false
-    END_TIME = 200
-    SCROLL_SPEED = 400
-
-    constructor: (@game, @gameScene) ->
+    constructor: (@game, @score) ->
       super @game, "gameOverScene"
-      @time = 0
-
-      if not SCALED
-        END_TIME *= @game.ratio
-        SCROLL_SPEED *= @game.ratio
-        SCALED = true
-      console.log "game over"
+      @scoreBoard = new ScoreBoard(@)
+      @scoreBoard.score = @score
+      @addChildElement(@scoreBoard.el)
+      @addChildElement $('<span class="heading"></span>')
 
     update: (dt) ->
       super dt

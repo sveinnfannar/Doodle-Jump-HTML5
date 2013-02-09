@@ -3,10 +3,17 @@ define ['score'], (score) ->
 
     constructor: (@gameScene) ->
       @el = $('<div class="scoreboard">0</div>')
-      @score = 0
+      @_score = 0
       return
 
     update: (camera) ->
-      @el.html @score + Math.floor -camera.position
+      @score = Math.max(Math.floor(-(@gameScene.player.pos.y - @gameScene.height)), @_score)
+
+    @property 'score',
+      get: -> return @_score
+      set: (score) ->
+        console.log score
+        @_score = score
+        @el.html score
 
   return ScoreBoard
