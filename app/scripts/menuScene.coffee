@@ -4,25 +4,30 @@ define ["controls"], (controls) ->
 
     constructor: (@game) ->
       @el = $('<div class="menuScene">
-                <div class="button">Play</div>
-                <div class="button">About</div>
+                <div class="button play">Play</div>
+                <div class="button about">About</div>
+                <div class="doodle"></div>
                 </div>')
+      @playButtonEl = $('button play')
       ratio = game.ratio
-      console.log ratio
       @el.width ratio*SIZE.width
       @el.height ratio*SIZE.height
-      controls.on('touch', @onTouch.bind(@))
+      controls.on('keydown', @clickPlayButton.bind(@))
+      controls.on('touch', @clickPlayButton.bind(@))
 
     buildScene: ->
       return [@el]
 
-    onTouch: (event) ->
+    clickPlayButton: (e) ->
+      console.log event
+      @playButtonEl.addClass "pressed"
       @game.startGame()
 
     onFrame: (dt) ->
-      #nothing
+      # Nothing
     
     cleanup: ->
+      controls.off('keydown')
       controls.off('touch')
 
   return MenuScene
