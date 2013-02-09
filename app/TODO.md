@@ -20,11 +20,11 @@ MILESTONE 2
 ### From Teachers
 * ~~Accelerometer~~
 * Menus
-* Score / high score list
+* ~~Score~~ / high score list
 * Special platforms
 * Obstacles
-* Moving platforms/obstacles
-* Coins
+* Moving ~~platforms~~/obstacles
+* ~~Coins~~
 * Items
 * Screen interaction
 

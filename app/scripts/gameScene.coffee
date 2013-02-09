@@ -20,7 +20,6 @@ define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Pl
       @entityManager.reset()
 
     onFrame: (dt) ->
-      console.log dt
       @update dt
       @render()
 

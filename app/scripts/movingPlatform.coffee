@@ -5,8 +5,8 @@ define ["platform"], (Platform) ->
   class MovingPlatform extends Platform
     SPEED = 20
 
-    constructor: (rect, xBounds) ->
-      super rect
+    constructor: (gameScene, rect, xBounds) ->
+      super gameScene, rect
       @minX = xBounds.min
       @maxX = xBounds.max
       @velocity = SPEED

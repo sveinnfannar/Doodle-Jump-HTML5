@@ -65,6 +65,15 @@
   background-color: rgba(0, 180, 180, 0.9);
 }
 
+.item {
+  position: absolute;
+}
+
+.item.coin {
+  background: url('../images/ball.png') no-repeat;
+  background-size: cover;
+}
+
 .scoreboard {
   position: absolute;
   width: 100%;
