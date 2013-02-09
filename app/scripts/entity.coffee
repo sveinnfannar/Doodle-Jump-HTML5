@@ -4,7 +4,7 @@ define [], ->
 
   class Entity
 
-    constructor: (rect) ->
+    constructor: (@gameScene, rect) ->
       @el = @makeElement()
       @rect = rect
       @rect.left = @rect.x
@@ -34,14 +34,17 @@ define [], ->
     update: (dt) ->
       #do nothing
 
+    #Checks collision with player, defaults to platform detection
+    checkPlayerCollision: (player, oldPosition) ->
+      if player.pos.y > @rect.y and @rect.y >= oldPosition.y
+        if player.pos.x > @rect.left - player.PLAYER_SIZE.x / 4 and player.pos.x < @rect.right + player.PLAYER_SIZE.x / 4
+          @collision()
+
     collision: () ->
       #do nothing
 
     dead: () ->
       return false
-
-    solid: ->
-      return true
 
     render: (camera) ->
       @el.css $.fx.cssPrefix + 'transform', "translate(#{@rect.x}px,#{@rect.y-camera.position}px)"

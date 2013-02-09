@@ -3,10 +3,10 @@ define ['score'], (score) ->
 
     constructor: (@gameScene) ->
       @el = $('<div class="scoreboard">0</div>')
-
+      @score = 0
       return
 
     update: (camera) ->
-      @el.html Math.floor -camera.position
+      @el.html @score + Math.floor -camera.position
 
   return ScoreBoard

@@ -1,4 +1,4 @@
-define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatform, FragilePlatform) ->
+define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, MovingPlatform, FragilePlatform, Coin) ->
   class EntityManager
     SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
@@ -41,7 +41,7 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
     render: (camera) ->
       if camera.position != @previousCameraPosition
         @previousCameraPosition = camera.position
-      platform.render camera for platform in @platforms
+      entity.render camera for entity in @entities
 
     update: (dt, camera) ->
       entity.update(dt) for entity in @entities
@@ -64,11 +64,19 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
 
         platform.el.remove()
         if r > 0.6
-          platform = new MovingPlatform @getPlatformRect(platform.x, platform.y), {min: platform.x-50, max: platform.x+50}
+          platform = new MovingPlatform @gameScene, @getRect(platform.x, platform.y), {min: platform.x-50, max: platform.x+50}
         else if r > 0.3
-          platform = new FragilePlatform @getPlatformRect(platform.x, platform.y)
+          platform = new FragilePlatform @gameScene, @getRect(platform.x, platform.y)
+          if Math.random() > 0.6
+            r = @getRect(platform.x, platform.y - 20)
+            r.right -= 20
+            r.x += 20
+            coin = new Coin @gameScene, r
+            @gameScene.game.el.append coin.el
+            @items.push coin
+            @entities.push coin
         else
-          platform = new Platform @getPlatformRect(platform.x, platform.y)
+          platform = new Platform @gameScene, @getRect(platform.x, platform.y)
         @gameScene.game.el.append platform.el
         @platforms.push platform
         @entities.push platform
@@ -98,12 +106,12 @@ define ["platform", "movingPlatform", "fragilePlatform"], (Platform, MovingPlatf
         obstacle.el.remove()
 
     createPlatform: (x, y) ->
-      rect = @getPlatformRect(x, y)
-      platform = new Platform(rect)
+      rect = @getRect(x, y)
+      platform = new Platform @gameScene, rect
       @platforms.push platform
       @entities.push platform
     
-    getPlatformRect:(x, y) ->
+    getRect:(x, y) ->
       rect =
         x: x
         y: y

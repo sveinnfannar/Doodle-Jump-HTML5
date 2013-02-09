@@ -11,8 +11,8 @@ define ["platform"], (Platform) ->
     DYING = 2
     DEAD = 3
 
-    constructor: (rect) ->
-      super rect
+    constructor: (gameScene, rect) ->
+      super gameScene, rect
       @state = NORMAL
       @el.addClass "fragile"
       @fracture_time = -1
@@ -38,8 +38,9 @@ define ["platform"], (Platform) ->
     dead: ->
       return @state == DEAD
 
-    solid: ->
-      return @state != DEAD and @state != DYING
+    checkPlayerCollision: (player, oldPosition) ->
+      if @state != DEAD and @state != DYING
+        super player, oldPosition
 
     collision: ->
       super()
