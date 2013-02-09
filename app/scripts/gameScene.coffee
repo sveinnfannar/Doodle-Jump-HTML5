@@ -8,6 +8,19 @@ define ["player", "camera", "entityManager", "gameOverScene", "scoreBoard"], (Pl
       @entityManager = new EntityManager(this)
       @scoreBoard = new ScoreBoard(@)
       @reset()
+      @music = new Howl({
+        urls: ['/sound/popcorn.ogg'],
+        buffer: true,
+        loop: true
+      }).play()
+      @sounds = new Howl({
+        urls: ['/sound/sprite_sound.wav'],
+        sprite: {
+          'buzzer': [0, 278],
+          'jump': [300, 1131],
+          'spring': [1300, 2240]
+        }
+      })
 
     buildScene: ->
       return [@player.el, @scoreBoard.el].concat (entity.el for entity in @entityManager.entities)
