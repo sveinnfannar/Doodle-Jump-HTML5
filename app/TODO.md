@@ -37,6 +37,12 @@ MILESTONE 2
 * Sound effects and music
 * ..
 
+### TODO
+* cooler menus
+* fragile platform animation
+* high scores (using existing system)
+
+
 ### MILESTONE 3 GRADING
 * 10% Game screens
 * 10% Back for more
