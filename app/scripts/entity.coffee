@@ -1,43 +1,32 @@
 define [], ->
-  Function::property = (prop, desc) ->
-    Object.defineProperty @prototype, prop, desc
 
   class Entity
 
-    constructor: (@gameScene, rect) ->
+    constructor: (@gameScene, @x, @y) ->
       @el = @makeElement()
-      @rect = rect
-      @rect.left = @rect.x
-      @width = rect.right - rect.x
-      @height = rect.bottom - rect.y
-      @el.css {
-        width: @width
-        height: @height
-      }
 
     @makeElement: ->
       alert "makeElement called in superclass"
 
-    @property 'x',
-      get: -> @rect.x
-      set: (x) ->
-        @rect.x = x
-        @rect.right = x + @width
-        @rect.left = x
+    @property 'width',
+      get: ->
+        if @_width?
+          return @_width
+        @_width = @el.width()
 
-    @property 'y',
-      get: -> @rect.y
-      set: (y) ->
-        @rect.y = y
-        @rect.bottom = y + @height
+    @property 'height',
+      get: ->
+        if @_height?
+          return @_height
+        @_height = @el.height()
 
     update: (dt) ->
       #do nothing
 
     #Checks collision with player, defaults to platform detection
     checkPlayerCollision: (player, oldPosition) ->
-      if player.pos.y > @rect.y and @rect.y >= oldPosition.y
-        if player.pos.x > @rect.left - player.PLAYER_SIZE.x / 4 and player.pos.x < @rect.right + player.PLAYER_SIZE.x / 4
+      if player.pos.y > @y and @y >= oldPosition.y
+        if player.pos.x > @x - player.width / 4 and player.pos.x < @x + @width + player.width / 4
           @collision()
 
     collision: () ->
@@ -47,6 +36,6 @@ define [], ->
       return false
 
     render: (camera) ->
-      @el.css $.fx.cssPrefix + 'transform', "translate(#{@rect.x}px,#{@rect.y-camera.position}px)"
+      @el.css $.fx.cssPrefix + 'transform', "translate(#{@x}px,#{@y-camera.position}px)"
 
   return Entity

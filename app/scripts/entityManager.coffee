@@ -2,8 +2,6 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
   class EntityManager
     SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
-    PLATFORM_SIZE = {x: 45, y: 11}
-    HALF_PLATFORM_WIDTH = PLATFORM_SIZE.x / 2
     PLATFORM_X_VARIANCE = 20
     PLATFORM_Y_VARIANCE = 20
 
@@ -19,19 +17,17 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
       ratio = @gameScene.game.ratio
       if not SCALED
         AVERAGE_PLATFORM_DISTANCE *= ratio
-        PLATFORM_SIZE.x *= ratio
-        PLATFORM_SIZE.y *= ratio
-        HALF_PLATFORM_WIDTH *= ratio
         PLATFORM_X_VARIANCE *= ratio
         PLATFORM_Y_VARIANCE *= ratio
         SCALED = true
+
       return
 
     reset: ->
       @addRandomPlatforms()
 
     addRandomPlatforms: ->
-      previousX = @screenWidth/2 - HALF_PLATFORM_WIDTH
+      previousX = @screenWidth/2
       for y in [@screenHeight/AVERAGE_PLATFORM_DISTANCE..0]
         x = (Math.sin(y) * @screenWidth/4 + previousX) + PLATFORM_X_VARIANCE * (Math.random() - 0.5)
         @createPlatform x,
@@ -57,28 +53,29 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
       remove = (platform for platform in @platforms when @_shouldRemove platform, camera)
       for platform in remove
         platform.y -= @screenHeight + 20
-        platform.x = Math.random() * (@screenWidth + PLATFORM_SIZE.x) - PLATFORM_SIZE.x
+        platform.x = Math.random() * (@screenWidth + platform.width) - platform.width 
         @platforms.splice @platforms.indexOf(platform), 1
         @entities.splice @entities.indexOf(platform), 1
         r = Math.random()
 
-        platform.el.remove()
         if r > 0.6
-          platform = new MovingPlatform @gameScene, @getRect(platform.x, platform.y), {min: platform.x-50, max: platform.x+50}
+          newPlatform = new MovingPlatform @gameScene, platform.x, platform.y, {min: platform.x-50, max: platform.x+50}
         else if r > 0.3
-          platform = new FragilePlatform @gameScene, @getRect(platform.x, platform.y)
+          newPlatform = new FragilePlatform @gameScene, platform.x, platform.y
           if Math.random() > 0.6
-            r = @getRect(platform.x, platform.y - 20)
-            r.x += 20
-            coin = new Coin @gameScene, r
+            coin = new Coin @gameScene, platform.x + platform.width / 2, platform.y
             @gameScene.game.el.append coin.el
+            #do this afterwards since height is calculated when added to the dom
+            coin.x -= coin.width/2
+            coin.y -= coin.height*2
             @items.push coin
             @entities.push coin
         else
-          platform = new Platform @gameScene, @getRect(platform.x, platform.y)
-        @gameScene.game.el.append platform.el
-        @platforms.push platform
-        @entities.push platform
+          newPlatform = new Platform @gameScene, platform.x, platform.y
+        platform.el.remove()
+        @gameScene.game.el.append newPlatform.el
+        @platforms.push newPlatform
+        @entities.push newPlatform
 
     updateEnemies: (camera) ->
       remove = (enemy for enemy in @enemies when @_shouldRemove enemy, camera)
@@ -105,16 +102,8 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin"], (Platform, Mov
         obstacle.el.remove()
 
     createPlatform: (x, y) ->
-      rect = @getRect(x, y)
-      platform = new Platform @gameScene, rect
+      platform = new Platform @gameScene, x, y
       @platforms.push platform
       @entities.push platform
-    
-    getRect:(x, y) ->
-      rect =
-        x: x
-        y: y
-        right: x + PLATFORM_SIZE.x
-        bottom: y + PLATFORM_SIZE.y
 
   return EntityManager

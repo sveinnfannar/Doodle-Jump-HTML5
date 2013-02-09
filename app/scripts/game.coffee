@@ -1,4 +1,6 @@
 #global define, $ 
+Function::property = (prop, desc) ->
+  Object.defineProperty @prototype, prop, desc
 define ["camera", "gameScene", "controls", "menuScene"], (Camera, GameScene, controls, MenuScene) ->
   
   ###
@@ -13,7 +15,7 @@ define ["camera", "gameScene", "controls", "menuScene"], (Camera, GameScene, con
     @DESIGN_SIZE = {x: 550, y: 600}
 
     @ratio = @height / @DESIGN_SIZE.y
-    el.width(@DESIGN_SIZE.x * @ratio)
+    $('body').css('font-size', @ratio * 10 + 'px')
     @width = el.width()
 
     # Cache a bound onFrame, el.width() and el.height() since we need them each frame.

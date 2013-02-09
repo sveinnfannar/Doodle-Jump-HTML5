@@ -6,10 +6,7 @@ define ['controls'], (controls) ->
     JUMP_VELOCITY = 1000
     MAX_SPEED = 400
     GRAVITY = 3000
-    PLATFORM_OFFSET = 5
     DRAG = 0.85
-    PLAYER_SIZE: {x: 60, y: 58}
-    PLAYER_MARGINS = {top: -60, left:-28}
 
     constructor: (@gameScene) ->
       # Set up the elements
@@ -41,19 +38,20 @@ define ['controls'], (controls) ->
         JUMP_VELOCITY *= ratio
         MAX_SPEED *= ratio
         GRAVITY *= ratio
-        PLATFORM_OFFSET *= ratio
-        @PLAYER_SIZE.x *= ratio
-        @PLAYER_SIZE.y *= ratio
-        PLAYER_MARGINS.top *= ratio
-        PLAYER_MARGINS.left *= ratio
         SCALED = true
-      @el.width(@PLAYER_SIZE.x)
-      @el.height(@PLAYER_SIZE.y)
-      @el.css {
-        'margin-top': "#{PLAYER_MARGINS.top}px",
-        'margin-left': "#{PLAYER_MARGINS.left}px"
-      }
       return
+
+    @property 'width',
+      get: ->
+        if @_width?
+          return @_width
+        @_width = @el.width()
+
+    @property 'height',
+      get: ->
+        if @_height?
+          return @_height
+        @_height = @el.height()
 
     update: (delta) ->
       # Left and right movement
