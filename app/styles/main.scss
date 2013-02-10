@@ -91,6 +91,13 @@ body {
   height: 1.5em;
 }
 
+.item.trampoline {
+  background: url('../images/trampoline.png') no-repeat;
+  background-size: cover;
+  width: 3em;
+  height: 1.5em;
+}
+
 .scoreboard {
   position: absolute;
   width: 100%;

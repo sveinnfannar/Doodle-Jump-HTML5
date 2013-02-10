@@ -1,4 +1,5 @@
-define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (Platform, MovingPlatform, FragilePlatform, Coin, Obstacle) ->
+define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle", "trampoline"],
+(Platform, MovingPlatform, FragilePlatform, Coin, Obstacle, Trampoline) ->
   class EntityManager
     SCALED = false
     AVERAGE_PLATFORM_DISTANCE = 30
@@ -9,7 +10,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle"], (P
     NEW_ITEM_CHANCE = 0.05
     NEW_PLATFORM_DISTANCE = 5000
     PLATFORM_TYPES = [Platform, MovingPlatform, FragilePlatform]
-    ITEM_TYPES = [Coin]
+    ITEM_TYPES = [Coin, Trampoline]
     OBSTACLE_TYPES = [Obstacle]
 
     constructor: (@gameScene) ->

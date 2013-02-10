@@ -65,7 +65,7 @@ define ['controls'], (controls) ->
         @pos.x = 0
 
       # Jump
-      if not @jumping and controls.keys['space']
+      if not @jumping
         @velocity.y = -JUMP_VELOCITY
         @jumping = true
 
@@ -90,6 +90,11 @@ define ['controls'], (controls) ->
       @pos.y = y
       @velocity.y = 0
       @jumping = false
+
+    applyForce: (x, y) ->
+      @velocity.x -= x
+      @velocity.y -= y
+      console.log @velocity
       
     render: (camera) ->
       # Update UI
