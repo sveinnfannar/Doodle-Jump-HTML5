@@ -25,16 +25,17 @@ body {
   position: absolute;
   right: 0;
   top: 0;
+  background: url('../images/background.png') repeat;
+  background-size: 320px 320px;
 }
 
 .game {
-  background: url('../images/background.png') repeat;
-  background-size: 320px 320px;
   height: 60em;
   width: 45em;
   position: relative;
   min-height: 100%;
   overflow: hidden;
+  margin: 0px auto 0px;
 }
 
 .playeranimator {
