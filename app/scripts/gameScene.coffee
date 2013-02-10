@@ -45,6 +45,7 @@ define ["scene", "player", "camera", "entityManager", "scoreBoard"],
       @entityManager.update dt, @camera
       @scoreBoard.update @camera
       if @player.pos.y > @camera.position + @game.height
+        @music.pause()
         @game.gameOver(@scoreBoard.score)
 
       # TODO: Remove the whole render stuff
