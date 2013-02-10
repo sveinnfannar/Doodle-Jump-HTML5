@@ -2,7 +2,7 @@ define ["item"], (Item) ->
   class Trampoline extends Item
     SCALED = false
     COLLISION_DISTANCE = 20
-    FORCE = -2500
+    FORCE = -2000
 
     constructor: (gameScene, x, y) ->
       super gameScene, x, y

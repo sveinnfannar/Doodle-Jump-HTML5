@@ -8,7 +8,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle", "tr
     NEW_ENTITY_OFFSET = 20
     NEW_OBSTACLE_CHANCE = 0.005
     NEW_ITEM_CHANCE = 0.05
-    NEW_PLATFORM_DISTANCE = 5000
+    NEW_PLATFORM_DISTANCE = 500
     PLATFORM_TYPES = [Platform, MovingPlatform, FragilePlatform]
     ITEM_TYPES = [Coin, Trampoline, Jetpack]
     OBSTACLE_TYPES = [Obstacle]

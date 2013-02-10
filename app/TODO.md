@@ -19,31 +19,32 @@ MILESTONE 2
 -----------
 ### From Teachers
 * ~~Accelerometer~~
-* Menus
+* ~~Menus~~
 * ~~Score~~ / high score list
-* Special platforms
+* ~~Special platforms~~
 * ~~Obstacles~~
-* Moving ~~platforms~~/obstacles
+* ~~Moving platforms/obstacles~~
 * ~~Coins~~
-* Items
+* ~!Items!!
 * Screen interaction
 
 ### Our Ideas
 * Motion blur
 * Particle effects
-* Better game over
+* ~~Better game over~~
 * Shaders
 * Test for multiple platforms
-* Sound effects and music
+* ~~Sound effects and music~~
 * Jetpack
 * Space background when player reaches some height
 * DOM object pool
 * ..
 
 ### TODO
-* cooler menus
+* ~~cooler menus~~
 * fragile platform animation
 * high scores (using existing system)
+* iPad and android test
 
 
 ### MILESTONE 3 GRADING
