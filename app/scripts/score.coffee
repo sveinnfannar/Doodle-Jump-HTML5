@@ -7,12 +7,12 @@ define [], ->
         @topScores = []
       else
         @parseScores localStorage['topScores']
+      console.log @topScores
 
     topScore: ->
-      console.log @topScores
-      top = 0
+      top = {name: 'noone', score: 0}
       if @topScores.length > 0
-        top = @topScores.slice(-1)[0] # Last element
+        top = @topScores[0] # First element
       return top
 
     isTopScore: (score) ->
@@ -22,10 +22,10 @@ define [], ->
       if not @isTopScore score
         return
       
-      @topScores.push {name:name, score:score}
+      @topScores.splice 0, 0, {name:name, score:score}
       @topScores.sort (a,b) ->
         a.scare < b.score
-      if @topScores.len > MAX_HISTORY_LENGTH
+      while @topScores.len > MAX_HISTORY_LENGTH
         @topScores.splice @topScores.length-1, 1
 
       @_saveScores()

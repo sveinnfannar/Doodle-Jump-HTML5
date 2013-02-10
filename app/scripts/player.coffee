@@ -21,6 +21,9 @@ define ['controls'], (controls) ->
       @velocity =
         x: 0
         y: 0
+      @jetpack =
+        y: 0
+        time: 0
       @jumping = false
       @flip = 1
 
@@ -75,6 +78,9 @@ define ['controls'], (controls) ->
       @velocity.x *= DRAG
       @velocity.y += delta * GRAVITY
 
+      if @jetpack.time > 0
+        @velocity.y = @jetpack.y
+
       # Update position
       oldPos = {y: @pos.y, x: @pos.x}
 
@@ -82,7 +88,12 @@ define ['controls'], (controls) ->
       @pos.y += delta * @velocity.y
 
       # Check for collisions
-      @checkCollisions oldPos
+      if @jetpack.time > 0
+        @jetpack.time -= delta
+        if @jetpack.time <= 0
+          @animator.removeClass "jetpack"
+      else
+        @checkCollisions oldPos
 
     checkCollisions: (oldPos) ->
       for entity in @gameScene.entityManager.entities
@@ -98,6 +109,10 @@ define ['controls'], (controls) ->
       console.log @velocity
       @velocity.x = x
       @velocity.y = y
+
+    startJetpack: (force, time) ->
+      @jetpack = {y: force, time: time}
+      @animator.addClass "jetpack"
 
     getAnimationEl: ->
       return @animator

@@ -7,8 +7,7 @@ define ["camera", "gameScene", "controls", "menuScene", "gameOverScene"],
     constructor: (el) ->
       console.log "GAME!!"
       @el = el
-      @width = el.width()
-      @height = window.innerHeight #el.height()
+      @height = el.height()
       @DESIGN_SIZE = {x: 550, y: 768}
       @ratio = window.screen.height / @DESIGN_SIZE.y
       @update = @update.bind(this)
