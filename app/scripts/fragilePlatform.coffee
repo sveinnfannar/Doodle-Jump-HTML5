@@ -3,33 +3,34 @@ define ["platform"], (Platform) ->
     Object.defineProperty @prototype, prop, desc
 
   class FragilePlatform extends Platform
-    FRACTURE_TIME = 1
     DIE_TIME = 1
     DIE_SPEED = 50
     NORMAL = 0
-    FRACTURING = 1
-    DYING = 2
-    DEAD = 3
+    DYING = 1
+    DEAD = 2
+    FRAME_SIZE = {width: 4.5, height: 1.2}
+    ANIMATION_FRAMES = 4
 
     constructor: (gameScene, x, y) ->
       super gameScene, x, y
       @state = NORMAL
       @el.addClass "fragile"
-      @fracture_time = -1
-      @die_time = -1
+      @die_time = 0
+      @animation_index = 0
 
     update: (dt) ->
       super dt
-      if @state == FRACTURING
-        @fracture_time += dt
-        if @fracture_time > FRACTURE_TIME
-          @el.removeClass "fracturing"
-          @el.addClass "dying"
-          @state = DYING
-          @die_time = 0
-      else if @state == DYING
+      if @state == DYING
         @die_time += dt
-        @el.removeClass "dying"
+        if @die_time > 0.3
+          @animation_index = 3
+        else if @die_time > 0.15
+          @animation_index = 2
+        else if @die_time > 0
+          @animation_index = 1
+
+        @el.css "background-position", "#{-FRAME_SIZE.width*@animation_index}em 0px"
+        
         if @die_time > DIE_TIME
           @state = DEAD
         else
@@ -45,9 +46,6 @@ define ["platform"], (Platform) ->
     collision: ->
       super()
       if @state == NORMAL
-        @el.removeClass "fragile"
-        @el.addClass "fracturing"
-        @state = FRACTURING
-        @fracture_time = 0
+        @state = DYING
 
   return FragilePlatform

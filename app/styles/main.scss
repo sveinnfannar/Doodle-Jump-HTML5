@@ -76,7 +76,11 @@ body {
 }
 
 .platform.fragile {
-  background: yellow;
+  background: url('../images/brown_platform_breaking_animation.png') no-repeat;
+  background-size: 18em 1.2em;
+  background-position: 0em 0em;
+  width: 4.5em;
+  height: 1.2em;
 }
 
 .platform.fracturing {
