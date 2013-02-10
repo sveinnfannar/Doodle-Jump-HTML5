@@ -36,6 +36,10 @@ body {
   min-height: 100%;
   overflow: hidden;
   margin: 0px auto 0px;
+  border-right: 2px solid;
+  border-left: 2px solid;
+  background: url('../images/background.png') repeat;
+  background-size: 320px 320px;
 }
 
 .playeranimator {
@@ -56,6 +60,11 @@ body {
 
 .player.trampoline {
   @include animation(doodle-trampoline-rotate 1s linear infinite)
+}
+
+.player.jetpack {
+  background: url('../images/doodle_jetpack.png') no-repeat;
+  background-size: cover;
 }
 
 .platform {
@@ -105,6 +114,14 @@ body {
   width: 4em;
   height: 1.86em;
   margin-top: 0.6em;
+  z-index: 99;
+}
+
+.item.jetpack {
+  background: url('../images/jetpack.png') no-repeat;
+  background-size: cover;
+  width: 1.75em;
+  height: 2.55em;
   z-index: 99;
 }
 

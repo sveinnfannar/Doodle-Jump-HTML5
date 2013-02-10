@@ -18,7 +18,7 @@ define [], ->
       diff = @position - @target
       
       #Move camera further the further from our target we are
-      dist = diff * 0.08
+      dist = diff * 0.15
 
       #Make sure we always travel a reasonable amount
       if dist < MIN_CAMERA_MOVEMENT
