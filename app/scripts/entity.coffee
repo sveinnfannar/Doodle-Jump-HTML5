@@ -36,6 +36,6 @@ define [], ->
       return false
 
     render: (camera) ->
-      @el.css $.fx.cssPrefix + 'transform', "translate(#{@x}px,#{@y-camera.position}px)"
+      @el.css $.fx.cssPrefix + 'transform', "translate3d(#{@x}px,#{@y-camera.position}px, 0px)"
 
   return Entity

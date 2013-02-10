@@ -10,7 +10,9 @@ define ['controls'], (controls) ->
 
     constructor: (@gameScene) ->
       # Set up the elements
-      @el = $('<div class="player"></div>')
+      @animator = $('<div class="player"></div>')
+      @el = $('<div class="playeranimator"></div>')
+      @el.append @animator
 
       @flip = 1
       @pos =
@@ -90,14 +92,18 @@ define ['controls'], (controls) ->
       @pos.y = y
       @velocity.y = 0
       @jumping = false
+      @animator.removeClass "trampoline"
 
     applyForce: (x, y) ->
       console.log @velocity
       @velocity.x = x
       @velocity.y = y
+
+    getAnimationEl: ->
+      return @animator
       
     render: (camera) ->
       # Update UI
-      @el.css $.fx.cssPrefix + 'transform', "translate(#{@pos.x}px,#{@pos.y - camera.position}px) scale(#{@flip}, 1)"
+      @el.css $.fx.cssPrefix + 'transform', "translate3d(#{@pos.x}px,#{@pos.y - camera.position}px, 0px) scale(#{@flip}, 1)"
 
   return Player

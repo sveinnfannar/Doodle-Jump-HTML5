@@ -9,8 +9,8 @@ define ["camera", "gameScene", "controls", "menuScene", "gameOverScene"],
       @el = el
       @width = el.width()
       @height = window.innerHeight #el.height()
-      @DESIGN_SIZE = {x: 550, y: 600}
-      @ratio = @height / @DESIGN_SIZE.y
+      @DESIGN_SIZE = {x: 550, y: 768}
+      @ratio = window.screen.height / @DESIGN_SIZE.y
       @update = @update.bind(this)
       @active = false
       @currentScene = null

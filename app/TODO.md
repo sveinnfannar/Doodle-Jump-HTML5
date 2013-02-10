@@ -37,6 +37,7 @@ MILESTONE 2
 * Sound effects and music
 * Jetpack
 * Space background when player reaches some height
+* DOM object pool
 * ..
 
 ### TODO

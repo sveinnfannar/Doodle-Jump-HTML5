@@ -28,7 +28,7 @@ define ["item"], (Item) ->
       super()
       @collected = false
       @gameScene.player.applyForce 0, FORCE
+      @gameScene.player.getAnimationEl().addClass "trampoline"
       #@gameScene.sounds.play('spring_sound')
-      console.log "dkdk"
 
   return Trampoline
