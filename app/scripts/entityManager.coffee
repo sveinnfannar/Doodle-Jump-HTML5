@@ -96,7 +96,6 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle", "tr
     _randomEntityXPosition: (width) ->
       Math.random() * (@screenWidth + width) - width
           
-          
     update: (dt, camera) ->
       entity.update(dt) for entity in @entities
       @updatePlatforms camera

@@ -94,8 +94,10 @@ body {
 .item.trampoline {
   background: url('../images/trampoline.png') no-repeat;
   background-size: cover;
-  width: 3em;
-  height: 1.5em;
+  width: 4em;
+  height: 1.86em;
+  margin-top: 0.6em;
+  z-index: 99;
 }
 
 .scoreboard {
@@ -224,5 +226,17 @@ body {
   }
   to {
     top: 50.2em;
+  }
+}
+
+@include keyframes(doodle-trampoline-rotate) {
+  from {
+    @include transform(rotate(0));
+  }
+  50% {
+    @include transform(rotate(180deg));
+  }
+  to {
+    @include transform(rotate(360deg));
   }
 }

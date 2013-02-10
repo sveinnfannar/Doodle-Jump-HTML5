@@ -92,9 +92,9 @@ define ['controls'], (controls) ->
       @jumping = false
 
     applyForce: (x, y) ->
-      @velocity.x -= x
-      @velocity.y -= y
       console.log @velocity
+      @velocity.x = x
+      @velocity.y = y
       
     render: (camera) ->
       # Update UI
