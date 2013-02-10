@@ -7,7 +7,6 @@ define [], ->
         @topScores = []
       else
         @parseScores localStorage['topScores']
-      console.log @topScores
 
     topScore: ->
       top = {name: 'noone', score: 0}

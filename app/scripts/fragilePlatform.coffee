@@ -29,7 +29,7 @@ define ["platform"], (Platform) ->
         else if @die_time > 0
           @animation_index = 1
 
-        @el.css "background-position", "#{-FRAME_SIZE.width*@animation_index}em 0px"
+        @el.css "background-position", "#{-FRAME_SIZE.width*@animation_index}em 0"
         
         if @die_time > DIE_TIME
           @state = DEAD
