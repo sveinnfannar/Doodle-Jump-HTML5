@@ -7,6 +7,7 @@ define [], ->
         @topScores = []
       else
         @parseScores localStorage['topScores']
+      console.log @topScores
 
     topScore: ->
       top = {name: 'noone', score: 0}
@@ -22,10 +23,8 @@ define [], ->
         return
       
       @topScores.splice 0, 0, {name:name, score:score}
-      @topScores.sort (a,b) ->
-        a.scare < b.score
-      while @topScores.len > MAX_HISTORY_LENGTH
-        @topScores.splice @topScores.length-1, 1
+      @topScores.sort()
+      @topScores.splice MAX_HISTORY_LENGTH
 
       @_saveScores()
 
@@ -35,7 +34,6 @@ define [], ->
 
     parseScores: (string) ->
       @topScores = JSON.parse(string)
-      @topScores.sort (a, b) ->
-        a.score < b.score
+      @topScores.sort()
 
   return new Score
