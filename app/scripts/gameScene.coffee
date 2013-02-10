@@ -17,7 +17,7 @@ define ["scene", "player", "camera", "entityManager", "scoreBoard"],
         urls: ['/sound/popcorn.ogg'],
         buffer: true,
         loop: true
-      }).play()
+      })
       @sounds = new Howl({
         urls: ['/sound/sprite_sound.wav'],
         sprite: {
