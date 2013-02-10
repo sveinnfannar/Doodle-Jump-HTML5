@@ -10,6 +10,7 @@ Features
 --------
 * Impressive main menu
 * Score system which records your highest score
+    * Using local storage
 * An awesome game over scene
 * Jumping doodle
 * Randomly generated levels which add challenges as you get further

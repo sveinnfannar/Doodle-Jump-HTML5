@@ -1,6 +1,5 @@
 TODO
 ====
-
 Here is a little todo list for this awesome game.
 
 MILESTONE 1
@@ -25,7 +24,7 @@ MILESTONE 2
 * ~~Obstacles~~
 * ~~Moving platforms/obstacles~~
 * ~~Coins~~
-* ~!Items!!
+* ~~Items~~
 * Screen interaction
 
 ### Our Ideas
@@ -42,17 +41,9 @@ MILESTONE 2
 
 ### TODO
 * ~~cooler menus~~
-* fragile platform animation
+* ~~fragile platform animation~~
 * high scores (using existing system)
-* iPad and android test
-
-
-### MILESTONE 3 GRADING
-* 10% Game screens
-* 10% Back for more
-* 10% Device support
-* 10% Extra device support
-* 10% Per extra feature
+* ~~iPad and android test~~
 
 BUGS
 ----
