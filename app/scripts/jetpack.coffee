@@ -3,7 +3,7 @@ define ["item"], (Item) ->
     SCALED = false
     COLLISION_DISTANCE = 20
     FORCE = -1800
-    TIME = 3
+    TIME = 1
 
     constructor: (gameScene, x, y) ->
       super gameScene, x, y
