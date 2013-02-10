@@ -6,7 +6,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle", "tr
     PLATFORM_X_VARIANCE = 20
     PLATFORM_Y_VARIANCE = 20
     NEW_ENTITY_OFFSET = 20
-    NEW_OBSTACLE_CHANCE = 0.005
+    NEW_OBSTACLE_CHANCE = 0.03
     NEW_ITEM_CHANCE = 0.05
     NEW_PLATFORM_DISTANCE = 500
     PLATFORM_TYPES = [Platform, MovingPlatform, FragilePlatform]
@@ -71,7 +71,7 @@ define ["platform", "movingPlatform", "fragilePlatform", "coin", "obstacle", "tr
       type = OBSTACLE_TYPES[@_randomIndex OBSTACLE_TYPES.length]
       newObstacle = new type @gameScene, 0, camera.position - NEW_ENTITY_OFFSET
       @gameScene.game.el.append newObstacle.el
-
+      newObstacle.x = @_randomEntityXPosition(newObstacle.width)
       @obstacles.push newObstacle
       @entities.push newObstacle
 
