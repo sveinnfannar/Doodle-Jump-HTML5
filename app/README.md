@@ -36,3 +36,15 @@ Design:
   entity manager and we're good to go.
   
   The game automatically scales in size depending on device size so the game can be played on multiple different kinds of devices
+
+Device support:
+  tested on the following platforms
+
+  chrome 24.0 on MacOSX mountain lion
+  Safari 6.0.2 On MacOSX mountain lion
+  chrome 24.0 on Ubuntu
+  firefox 18.0.2 on Ubuntu
+
+  chrome 18.0 on Nexus 4
+  safari on iPad 3
+
