@@ -9,7 +9,7 @@ define ["scene", "controls"], (Scene, controls) ->
       @addChildElement($('<div class="doodle"></div>'))
       controls.on('keydown', @clickPlayButton.bind(@))
       @play.on('touchstart', @clickPlayButton.bind(@))
-        .on('click', @clickPlayButton.bind(@))
+           .on('click', @clickPlayButton.bind(@))
 
     clickPlayButton: (e) ->
       @game.startGame()

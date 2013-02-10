@@ -113,7 +113,6 @@ body {
   width: 100%;
   height: 100%;
   font: bold;
-  z-index: 999;
 
    .button {
     position: absolute;
@@ -127,6 +126,11 @@ body {
 
     .pressed {
       background: url('../images/button-pressed.png');
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
     }
   }
 
