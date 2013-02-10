@@ -12,7 +12,6 @@ define ['score'], (score) ->
     @property 'score',
       get: -> return @_score
       set: (score) ->
-        console.log score
         @_score = score
         @el.html score
 

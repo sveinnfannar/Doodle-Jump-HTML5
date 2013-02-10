@@ -30,7 +30,7 @@ define ["scene", "player", "camera", "entityManager", "scoreBoard"],
 
     reset: ->
       @player.pos =
-        x: @width/2
+        x: @width/2 + 20
         y: (5.5 * @height) / 6
       @entityManager.createPlatform(@width/2, @height - 30)
       @entityManager.reset()

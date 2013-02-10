@@ -114,11 +114,47 @@ body {
   width: 100%;
   height: 100%;
   font: bold;
-  color: red;
   z-index: 999;
-  background-color: red;
-}
 
+   .button {
+    position: absolute;
+    background: url('../images/button.png');
+    background-size: cover;
+    font-family: Al-seana;
+    font-size: 4em;
+    text-align: center;
+    width: 3em;
+    height: 1.07em;
+
+    .pressed {
+      background: url('../images/button-pressed.png');
+    }
+  }
+
+  .button.playAgain {
+    top: 7em;
+    left: 4em;
+  }
+
+  .information {
+    position: absolute;
+    font-family: Al-seana;
+    font-size: 2em;
+    top: 4em;
+    left: 5.2em;
+    text-align: center;
+
+    .heading {
+      font-size: 3em;
+      color: #e6a399;
+    }
+
+    span {
+      font-size: 2em;
+      font-size: bold;
+    }
+  }
+}
 
 .menuScene {
   position: absolute;

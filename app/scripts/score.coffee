@@ -7,12 +7,13 @@ define [], ->
       else
         @parseScores localStorage['topScores']
 
-    isTopScore: (score) ->
+    topScore: ->
       top = 0
-      for storedScore in @topScores
-        if storedScore > top
-          top = storedScore
-      return score > top
+      if @topScores.length > 0
+        top = @topScores[0]
+
+    isTopScore: (score) ->
+      return score > @getTopScore()
 
     storeScore: (name, score) ->
       if not isTopScore score
